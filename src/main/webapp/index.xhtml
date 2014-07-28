@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta
+		http-equiv="Content-Type"
+		content="text/html; charset=UTF-8" />
+	<title>Page Title</title>
+</h:head>
+
+<!--
+
+	IMPORTANTE!
+	~~~~~~~~~~~
+
+	1. Expressões calculáveis, programáveis ou avaliáveis são escritas numa estrutura
+	padrão "jogo-da-velha + chaves", assim "#{EXPRESSÃO}".
+	Ex.:
+		a) #{3+2} = 5;
+		b) #{(3+2) == 10} = false;
+		c) #{5 eq 5} = true;
+		d) #{true} = true;
+		e) #{true and false} = false;
+		f) #{true or false} = true;
+		g) #{(false or true) and true} = true;
+
+	2. O nome do BEAN, por default, é o mesmo nome da Classe, em camel-case. Por isso
+	que o bean "HelloBean" é chamado "helloBean", abaixo;
+	
+	3. Chamadas de métodos PÚBLICOS normais são efetuadas com o nome completo.
+	Ex.: se o método é "fazerIsso()", você deve chamar "#{bean.fazerIsso()}";
+	
+	4. Chamadas de métodos PÚBLICOS GET são especiais. Efetue-as removendo o prefixo GET.
+	Ex.: para chamar o método "getNome()", chame "#{bean.nome}", sem o "get", com a
+	primeira letra em minúsculo e sem os parênteses.
+
+-->
+
+<h:body>
+	<h:panelGrid columns="1">
+		<!-- RESULTADO DA CHAMADA DO MÉTODO NO BEAN -->
+		<h:outputText value="Hello JSF Core" />
+		<h:button value="#{helloBean.sayHello()}" />
+		<h:outputText value="&nbsp;" />
+
+		<!-- RESULTADO DA CHAMADA DO MÉTODO NO BEAN -->
+		<h:outputText value="Hello JSF Primefaces Components" />
+		<p:button value="#{helloBean.sayHelloPrimefaces('Primefaces!')}" />
+		<h:outputText value="&nbsp;" />
+
+		<!-- RESULTADO DO ACESSO À UMA PROPRIEDADE VIA GET/SET -->
+		<h:outputText value="String property visible via GET/SET" />
+		<p:button value="#{helloBean.message}" />
+	</h:panelGrid>
+
+	<!-- COMPARAÇÕES EL -->
+	<h:panelGrid>
+		<h:outputText value="#{3+2}" />
+		<h:outputText value="#{(3+2) == 10}" />
+		<h:outputText value="#{5 eq 5}" />
+		<h:outputText value="#{true}" />
+		<h:outputText value="#{true and false}" />
+		<h:outputText value="#{true or false}" />
+		<h:outputText value="#{(false or true) and true}" />
+	</h:panelGrid>
+</h:body>
+
+</html>
