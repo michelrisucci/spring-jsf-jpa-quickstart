@@ -70,17 +70,19 @@
 			<version>7.0</version>
 		</dependency>
 
-		<!-- DATABASE [NOT REQUIRED] -->
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.31</version>
-		</dependency>
+		<!-- DATABASE (DISABLE REMOVING 'database-context.xml' IN WEB.XML) -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-dbcp2</artifactId>
 			<version>2.0.1</version>
 		</dependency>
+		<!-- CHANGE MYSQL TO SELECTED DATABASE JDBC DRIVER -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.31</version>
+		</dependency>
+		<!-- CHANGE HIBERNATE TO ECLIPSELINK IF CONVENIENT (CHANGE PROFILE IN WEB.XML) -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
