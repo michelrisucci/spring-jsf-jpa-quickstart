@@ -13,7 +13,7 @@ Spring + JSF + JPA Quickstart
 
 - To run:
   - Checkout using Git or SVN;
-  - Configure properties over src/main/webapp/WEB-INF/database;
+  - Configure properties over ```src/main/webapp/WEB-INF/database```;
   - Run using Maven 3.x:
 ```
 mvn clean jetty:run
