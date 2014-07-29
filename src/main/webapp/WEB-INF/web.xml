@@ -25,6 +25,11 @@
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
 
+	<!-- FACES CONFIGURE LISTENER - MOJARRA REQUIRED -->
+	<listener>
+		<listener-class>com.sun.faces.config.ConfigureListener</listener-class>
+	</listener>
+
 	<!-- SPRING CONTEXT LOADER LISTENER -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -36,7 +41,7 @@
 			/WEB-INF/database/database-context.xml
 		</param-value>
 	</context-param>
-	<!-- SWITCH SPRING PROFILES -->
+	<!-- SPRING BEAN PROFILES -->
 	<!-- PROFILE 'hibernate' ACTIVATES HIBERNATE AS JPA PROVIDER -->
 	<!-- PROFILE 'eclipselink' ACTIVATES ECLIPSELINK AS JPA PROVIDER -->
 	<!-- OTHER PROFILES CAN BE ACTIVATED USING COMMA, LIKE THIS: 'p1,p2,p3' -->
@@ -44,10 +49,5 @@
 		<param-name>spring.profiles.active</param-name>
 		<param-value>hibernate</param-value>
 	</context-param>
-
-	<!-- FACES CONFIGURE LISTENER -->
-	<listener>
-		<listener-class>com.sun.faces.config.ConfigureListener</listener-class>
-	</listener>
 
 </web-app>
