@@ -7,7 +7,7 @@
 
 	<groupId>com.github.michelrisucci.jsf</groupId>
 	<artifactId>jsf-quickstart</artifactId>
-	<version>1.0.0.GA</version>
+	<version>1.0.2.GA</version>
 	<packaging>war</packaging>
 
 	<build>
@@ -70,10 +70,37 @@
 			<version>7.0</version>
 		</dependency>
 
+		<!-- DATABASE [NOT REQUIRED] -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.31</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-dbcp2</artifactId>
+			<version>2.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>4.3.6.Final</version>
+		</dependency>
+
 		<!-- SPRING CONTEXT 4.0.6 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>4.0.6.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
+			<version>4.0.6.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
 			<version>4.0.6.RELEASE</version>
 		</dependency>
 

@@ -1,4 +1,4 @@
-package com.github.michelrisucci.jsf;
+package com.github.michelrisucci.jsf.bean;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -8,13 +8,15 @@ import javax.inject.Named;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.github.michelrisucci.jsf.model.Code;
+
 @Named
 @ViewScoped
 public class CodeBean {
 
 	public static final Log log = LogFactory.getLog(CodeBean.class);
 
-	private int code;
+	private Code code;
 
 	public CodeBean() {
 		log.info("Bean constructor called.");
@@ -24,7 +26,8 @@ public class CodeBean {
 	private void postConstruct() {
 		log.info("Bean @PostConstruct called.");
 
-		code = 999;
+		code = new Code();
+		code.setValue(1234567890);
 	}
 
 	@PreDestroy
@@ -32,11 +35,11 @@ public class CodeBean {
 		log.info("Bean @PreDestroy called.");
 	}
 
-	public int getCode() {
+	public Code getCode() {
 		return code;
 	}
 
-	public void setCode(int code) {
+	public void setCode(Code code) {
 		this.code = code;
 	}
 

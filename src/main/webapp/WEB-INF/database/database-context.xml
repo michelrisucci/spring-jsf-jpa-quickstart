@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:repository="http://www.springframework.org/schema/data/repository"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.3.xsd
+		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-4.0.xsd
+		http://www.springframework.org/schema/data/repository http://www.springframework.org/schema/data/repository/spring-repository-1.7.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd"
+>
+
+	<context:property-placeholder
+		file-encoding="UTF-8"
+		location="classpath:/WEB-INF/database/database.properties,classpath:/WEB-INF/database/hibernate-config.properties,classpath:/WEB-INF/database/eclipselink-config.properties" />
+
+	<!-- SETS DATASOURCE: HOLDS ALL DATABASE CONFIGURATIONS -->
+	<bean
+		id="dataSource"
+		class="org.apache.commons.dbcp2.BasicDataSource"
+	>
+		<property
+			name="driverClassName"
+			value="${jdbc.driver}" />
+		<property
+			name="url"
+			value="${jdbc.url}" />
+		<property
+			name="username"
+			value="${jdbc.username}" />
+		<property
+			name="password"
+			value="${jdbc.password}" />
+		<property
+			name="initialSize"
+			value="${datasource.pool.initialSize}" />
+		<property
+			name="maxTotal"
+			value="${datasource.pool.maxTotal}" />
+		<property
+			name="maxIdle"
+			value="${datasource.pool.maxIdle}" />
+		<property
+			name="minIdle"
+			value="${datasource.pool.minIdle}" />
+		<property
+			name="maxWaitMillis"
+			value="${datasource.pool.maxWaitMillis}" />
+		<property
+			name="validationQuery"
+			value="${datasource.pool.validationQuery}" />
+		<property
+			name="testWhileIdle"
+			value="${datasource.pool.testWhileIdle}" />
+	</bean>
+
+	<!-- SETS THE ENTITY MANAGER FACTORY BASED ON DATASOURCE AND THE ADAPTER -->
+	<bean
+		id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+	>
+		<property
+			name="packagesToScan"
+			value="${jpa.scannerBasePackage}" />
+		<property
+			name="dataSource"
+			ref="dataSource" />
+		<property
+			name="jpaVendorAdapter"
+			ref="jpaVendorAdapter" />
+		<property
+			name="jpaProperties"
+			ref="jpaPropertiesMap" />
+	</bean>
+
+	<!-- ENABLES ENTITY MANAGER AUTOWIRING WITH @PersistenceContext ANNOTATION -->
+	<bean
+		id="persistenceAnnotationBeanPostProcessor"
+		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+
+	<!-- ENABLES SPRING DATABASE EXCEPTIONS TO AUTOWIRE WITH @Repository ANNOTATION -->
+	<bean
+		id="persistenceExceptionTranslationPostProcessor"
+		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
+	<!-- TRANSACTION MANAGER DEFINITION -->
+	<bean
+		id="jpaTransactionManager"
+		class="org.springframework.orm.jpa.JpaTransactionManager"
+	>
+		<property
+			name="entityManagerFactory"
+			ref="entityManagerFactory" />
+	</bean>
+
+	<!-- TRANSACTION MANAGER CONFIGURATION -->
+	<tx:annotation-driven transaction-manager="jpaTransactionManager" />
+
+	<!-- PROFILE: HIBERNATE -->
+	<beans profile="hibernate">
+		<!-- SETS AN ADAPTER: HIBERNATE, ECLIPSELINK, OPENJPA, CUSTOM -->
+		<bean
+			id="jpaVendorAdapter"
+			class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"
+		>
+			<property
+				name="database"
+				value="${jpa.database}" />
+			<property
+				name="databasePlatform"
+				value="${jpa.hibernate.dialect}" />
+			<property
+				name="generateDdl"
+				value="${jpa.generateDdl}" />
+			<property
+				name="showSql"
+				value="${jpa.showSql}" />
+		</bean>
+
+		<util:map
+			id="jpaPropertiesMap"
+			key-type="java.lang.String"
+			value-type="java.lang.String"
+		>
+			<entry
+				key="hibernate.hbm2ddl.auto"
+				value="${jpa.hibernate.ddlConfiguration}" />
+			<entry
+				key="hibernate.format_sql"
+				value="${jpa.showSql}" />
+		</util:map>
+	</beans>
+
+	<!-- PROFILE: ECLIPSELINK -->
+	<beans profile="eclipselink">
+		<!-- SETS AN ADAPTER: HIBERNATE, ECLIPSELINK, OPENJPA, CUSTOM -->
+		<bean
+			id="jpaVendorAdapter"
+			class="org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter"
+		>
+			<property
+				name="database"
+				value="${jpa.database}" />
+			<property
+				name="databasePlatform"
+				value="${jpa.eclipselink.dialect}" />
+			<property
+				name="generateDdl"
+				value="${jpa.generateDdl}" />
+			<property
+				name="showSql"
+				value="${jpa.showSql}" />
+		</bean>
+
+		<util:map
+			id="jpaPropertiesMap"
+			key-type="java.lang.String"
+			value-type="java.lang.String"
+		>
+			<entry
+				key="eclipselink.weaving"
+				value="false" />
+		</util:map>
+	</beans>
+
+</beans>
