@@ -16,7 +16,7 @@ Spring + JSF + JPA Quickstart
     - H2;
     - Derby;
     - and many more...
-  - Hibernate 4.x as JPA 2.2 provider (switchable to EclipseLink if convenient - see web.xml).
+  - Hibernate 4.x as JPA 2.1 provider (switchable to EclipseLink if convenient - see web.xml).
 
 - To run:
   - Checkout using Git or SVN;
