@@ -1,7 +1,7 @@
 Spring + JSF + JPA Quickstart
 =============================
 
-- Version 1.0.3.GA
+- Version 1.0.4.GA
 
 - What it is: a quickstart project containing initial structure to:
   - Spring Context 4.x as JEE context provider;
