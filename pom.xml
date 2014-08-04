@@ -68,6 +68,8 @@
 			<groupId>javax</groupId>
 			<artifactId>javaee-web-api</artifactId>
 			<version>7.0</version>
+			<!-- SET SCOPE TO "provided" IF SERVER ALREADY EMBED IT -->
+			<scope>compile</scope>
 		</dependency>
 
 		<!-- DATABASE (DISABLE REMOVING 'database-context.xml' IN WEB.XML) -->
@@ -111,11 +113,15 @@
 			<groupId>com.sun.faces</groupId>
 			<artifactId>jsf-api</artifactId>
 			<version>2.2.7</version>
+			<!-- SET SCOPE TO "provided" IF SERVER ALREADY EMBED IT -->
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.sun.faces</groupId>
 			<artifactId>jsf-impl</artifactId>
 			<version>2.2.7</version>
+			<!-- SET SCOPE TO "provided" IF SERVER ALREADY EMBED IT -->
+			<scope>compile</scope>
 		</dependency>
 
 		<!-- PRIMEFACES 5.X -->
