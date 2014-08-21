@@ -15,19 +15,41 @@
 		content="text/html; charset=UTF-8"
 	/>
 	<title>Title</title>
+	
+	<style type="text/css">
+		.ui-widget {
+			font-size: small;
+		}
+	</style>
 </h:head>
 
 <h:body>
+	<p:growl
+		id="growl"
+		autoUpdate="true"
+		globalOnly="false"
+		showDetail="false"
+	/>
+
 	<h:form>
 		<p:outputLabel
 			for="inputCode"
-			value="JSF Code"
+			value="#{i18n['code']}"
 		/>
 		<p:inputText
 			id="inputCode"
 			value="#{codeBean.code.value}"
 		/>
-		<p:commandButton value="Ok" />
+		<p:commandButton
+			id="buttonSubmit"
+			value="#{i18n['button.submit']}"
+			action="#{codeBean.growlInfo}"
+		/>
+		<p:commandButton
+			id="buttonCancel"
+			value="#{i18n['button.cancel']}"
+			action="#{codeBean.growlError}"
+		/>
 	</h:form>
 </h:body>
 

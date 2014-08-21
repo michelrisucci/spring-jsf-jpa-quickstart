@@ -7,12 +7,16 @@
 
 	<groupId>com.github.michelrisucci.jsf</groupId>
 	<artifactId>jsf-quickstart</artifactId>
-	<version>1.0.4.GA</version>
+	<version>1.1.0.GA</version>
 	<packaging>war</packaging>
 
 	<build>
 		<!-- WEBAPP - RESOURCE -->
 		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
 			<resource>
 				<directory>src/main/webapp</directory>
 				<filtering>true</filtering>
@@ -72,12 +76,20 @@
 			<scope>compile</scope>
 		</dependency>
 
-		<!-- DATABASE (DISABLE REMOVING 'database-context.xml' IN WEB.XML) -->
+		<!-- APACHE COMMONS LANG -->
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
+
+		<!-- APACHE COMMONS DBCP2: DATABASE (DISABLE REMOVING 'database-context.xml' IN WEB.XML) -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-dbcp2</artifactId>
 			<version>2.0.1</version>
 		</dependency>
+
 		<!-- CHANGE MYSQL TO SELECTED DATABASE JDBC DRIVER -->
 		<dependency>
 			<groupId>mysql</groupId>

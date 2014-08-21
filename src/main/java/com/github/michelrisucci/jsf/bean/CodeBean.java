@@ -2,15 +2,16 @@ package com.github.michelrisucci.jsf.bean;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.faces.view.ViewScoped;
-import javax.inject.Named;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.github.michelrisucci.jsf.model.Code;
+import com.github.michelrisucci.jsf.util.FacesUtils;
 
-@Named
+@ManagedBean
 @ViewScoped
 public class CodeBean {
 
@@ -33,6 +34,14 @@ public class CodeBean {
 	@PreDestroy
 	private void preDestroy() {
 		log.info("Bean @PreDestroy called.");
+	}
+
+	public void growlInfo() {
+		FacesUtils.addI18nInfo("generic.operation.success");
+	}
+
+	public void growlError() {
+		FacesUtils.addI18nError("generic.operation.fail");
 	}
 
 	public Code getCode() {
