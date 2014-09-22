@@ -50,4 +50,10 @@
 		<param-value>hibernate</param-value>
 	</context-param>
 
+	<!-- PRIMEFACES THEME -->
+	<context-param>
+		<param-name>primefaces.THEME</param-name>
+		<param-value>bootstrap</param-value>
+	</context-param>
+
 </web-app>

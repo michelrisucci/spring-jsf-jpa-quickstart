@@ -15,12 +15,13 @@
 		content="text/html; charset=UTF-8"
 	/>
 	<title>Title</title>
-	
-	<style type="text/css">
-		.ui-widget {
-			font-size: small;
-		}
-	</style>
+
+	<h:outputStylesheet>
+	.ui-widget {
+		font-size: small;
+	}
+	</h:outputStylesheet>
+
 </h:head>
 
 <h:body>
@@ -32,14 +33,23 @@
 	/>
 
 	<h:form>
-		<p:outputLabel
-			for="inputCode"
-			value="#{i18n['code']}"
-		/>
-		<p:inputText
-			id="inputCode"
-			value="#{codeBean.code.value}"
-		/>
+		<p:dataTable
+			id="mainDataTable"
+			value="#{codeBean.items}"
+			var="item"
+		>
+			<p:column
+				headerText="#"
+				width="30"
+				style="text-align: center;"
+			>
+				<h:outputText value="#{item.id}" />
+			</p:column>
+			<p:column headerText="#{i18n['code']}">
+				<h:outputText value="#{item.value}" />
+			</p:column>
+		</p:dataTable>
+
 		<p:commandButton
 			id="buttonSubmit"
 			value="#{i18n['button.submit']}"

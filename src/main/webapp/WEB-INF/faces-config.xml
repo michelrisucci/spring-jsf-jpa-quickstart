@@ -9,6 +9,17 @@
 	<application>
 		<!-- SPRING FACES EL RESOLVER OVERRIDES JSF DEFAULT FACES EL RESOLVER -->
 		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+
+		<locale-config>
+			<default-locale>en</default-locale>
+			<supported-locale>pt</supported-locale>
+			<supported-locale>es</supported-locale>
+		</locale-config>
+
+		<resource-bundle>
+			<base-name>com.github.michelrisucci.jsf.i18n</base-name>
+			<var>i18n</var>
+		</resource-bundle>
 	</application>
 
 </faces-config>

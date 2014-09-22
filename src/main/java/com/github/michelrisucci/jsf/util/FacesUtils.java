@@ -16,12 +16,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.LocaleUtils;
-import org.springframework.web.context.ContextLoaderListener;
-import org.springframework.web.context.WebApplicationContext;
-
-import com.github.michelrisucci.jsf.i18n.I18n;
 
 public class FacesUtils {
+
+	public static final String I18N_BUNDLE_NAME = "com.github.michelrisucci.jsf.i18n";
+	public static final String I18N_BUNDLE_VAR = "i18n";
 
 	private FacesUtils() {
 	}
@@ -189,9 +188,9 @@ public class FacesUtils {
 	}
 
 	public static ResourceBundle getResourceBundle() {
-		WebApplicationContext context = ContextLoaderListener
-				.getCurrentWebApplicationContext();
-		return context.getBean(I18n.class);
+		FacesContext context = getFacesContext();
+		Application application = context.getApplication();
+		return application.getResourceBundle(context, I18N_BUNDLE_VAR);
 	}
 
 	public static String formatI18nMessage(String I18nMessage,
@@ -211,9 +210,9 @@ public class FacesUtils {
 	}
 
 	/**
-	 * Retrieve an instance of the ManagedBean from {@link FacesContext}.
+	 * Retrieve an instance of any context bean from {@link FacesContext}.
 	 */
-	public static <T> T getManagedBeanFromClass(Class<T> beanClass) {
+	public static <T> T getBeanFromClass(Class<T> beanClass) {
 		FacesContext context = getFacesContext();
 		Application application = context.getApplication();
 
@@ -236,7 +235,7 @@ public class FacesUtils {
 			return named.value();
 		} else {
 			throw new IllegalArgumentException(beanClass.getName()
-					+ " is not a JSF Managed Bean.");
+					+ " is not a bean.");
 		}
 	}
 
