@@ -1,7 +1,7 @@
 Spring + JSF + JPA Quickstart
 =============================
 
-- Version 1.1.0.GA
+- Version 1.1.2.GA
 
 - What it is: a quickstart project containing initial structure to:
   - Spring Context 4.x as JEE context provider;
@@ -18,20 +18,25 @@ Spring + JSF + JPA Quickstart
     - and many more...
   - Hibernate 4.x as JPA 2.1 provider (switchable to EclipseLink if convenient - see web.xml);
   - Internationalization;
-  - Managed Bean utilities.
+  - Bean utilities;
+  - Primefaces Twitter Bootstrap Theme.
 
 
 - To run:
   - Checkout using Git or SVN;
-  - Configure properties over ```src/main/webapp/WEB-INF/database```;
-  - Run using Maven 3.x ```mvn clean jetty:run```;
+  - Configure properties over `src/main/webapp/WEB-INF/database`;
+  - Run using Maven 3.x `mvn clean jetty:run`;
 
 What's new
 =============================
 
+- Version 1.1.2.GA
+  - Change `index.xhtml` to show a `p:datatable` with mock objects;
+  - Change default Primefaces Aristo theme to Bootstrap.
+
 - Version 1.1.0.GA
   - Internationalization;
-  - Managed Bean utilities (class FacesUtils);
+  - Bean utilities (class FacesUtils);
   - BUG: Spring does not fully support CDI, then @Named could not be used to define JSF Managed Beans.
 
 - Version 1.0.4.GA
