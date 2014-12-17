@@ -7,7 +7,7 @@
 
 	<groupId>com.github.michelrisucci.jsf</groupId>
 	<artifactId>jsf-quickstart</artifactId>
-	<version>1.1.2.GA</version>
+	<version>1.2.0.GA</version>
 	<packaging>war</packaging>
 
 	<build>
@@ -56,7 +56,7 @@
 			<plugin>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
-				<version>9.2.1.v20140609</version>
+				<version>9.2.6.v20141205</version>
 				<configuration>
 					<webApp>
 						<contextPath>/${project.artifactId}</contextPath>
@@ -78,9 +78,9 @@
 
 		<!-- APACHE COMMONS LANG -->
 		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
-			<version>2.6</version>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.3.2</version>
 		</dependency>
 
 		<!-- APACHE COMMONS DBCP2: DATABASE (DISABLE IN WEB.XML) -->
@@ -94,30 +94,30 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.31</version>
+			<version>5.1.34</version>
 		</dependency>
 		<!-- CHANGE HIBERNATE TO ECLIPSELINK IF CONVENIENT (CHANGE PROFILE IN WEB.XML) -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>4.3.6.Final</version>
+			<version>4.3.7.Final</version>
 		</dependency>
 
 		<!-- SPRING CONTEXT 4.0.6 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>4.0.6.RELEASE</version>
+			<version>4.1.3.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
-			<version>4.0.6.RELEASE</version>
+			<version>4.1.3.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
-			<version>4.0.6.RELEASE</version>
+			<version>4.1.3.RELEASE</version>
 		</dependency>
 
 		<!-- JSF 2.2.X -->
