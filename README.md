@@ -1,14 +1,14 @@
 Spring + JSF + JPA Quickstart
 =============================
 
-- Version 1.2.0.GA
+- Version 1.2.1.GA
 
 - What it is: a quickstart project containing initial structure to:
   - Spring Context 4.x as JEE context provider;
   - Jetty 9.2.x as Webserver;
   - Mojarra JavaServer Faces 2.2.x as JSF implementation;
   - Primefaces 5.x as JSF components library;
-  - Built-in MySQL Server connection for JDBC/JPA (extensible to ANY database - add specific JDBC drivers to POM if needed);
+  - Built-in PostgreSQL and MySQL Server connection for JDBC/JPA (extensible to ANY database - add specific JDBC drivers to POM if needed);
     - Oracle;
     - PostgreSQL;
     - Microsoft SQL Server;
@@ -31,12 +31,17 @@ Spring + JSF + JPA Quickstart
 What's new
 =============================
 
+- Version 1.2.1.GA
+  - Added PostgreSQL 9.x JDBC 4.1 driver;
+  - Project encoding strictly defined as UTF-8;
+  - Updated Primefaces version to 5.1.
+
 - Version 1.2.0.GA
-  - Full support component injection (@Inject and @Autowired) by extending the new utility class InjectionAwareBean;
+  - Full support component injection (@Inject and @Autowired) by extending the new utility class InjectionAwareBean.
 
 - Version 1.1.2.GA
-  - Change `index.xhtml` to show a `p:datatable` with mock objects;
-  - Change default Primefaces Aristo theme to Bootstrap.
+  - Changed `index.xhtml` to show a `p:datatable` with mock objects;
+  - Changed default Primefaces Aristo theme to Bootstrap.
 
 - Version 1.1.0.GA
   - Internationalization;

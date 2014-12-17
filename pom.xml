@@ -7,18 +7,24 @@
 
 	<groupId>com.github.michelrisucci.jsf</groupId>
 	<artifactId>jsf-quickstart</artifactId>
-	<version>1.2.0.GA</version>
+	<version>1.2.1.GA</version>
 	<packaging>war</packaging>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<resources.directory>src/main/resources</resources.directory>
+		<webapp.directory>src/main/webapp</webapp.directory>
+	</properties>
 
 	<build>
 		<!-- WEBAPP - RESOURCE -->
 		<resources>
 			<resource>
-				<directory>src/main/resources</directory>
+				<directory>${resources.directory}</directory>
 				<filtering>true</filtering>
 			</resource>
 			<resource>
-				<directory>src/main/webapp</directory>
+				<directory>${webapp.directory}</directory>
 				<filtering>true</filtering>
 			</resource>
 		</resources>
@@ -45,7 +51,7 @@
 					<filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
 					<webResources>
 						<resource>
-							<directory>src/main/webapp</directory>
+							<directory>${webapp.directory}</directory>
 							<filtering>true</filtering>
 						</resource>
 					</webResources>
@@ -58,6 +64,7 @@
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>9.2.6.v20141205</version>
 				<configuration>
+					<webAppSourceDirectory>${webapp.directory}</webAppSourceDirectory>
 					<webApp>
 						<contextPath>/${project.artifactId}</contextPath>
 					</webApp>
@@ -90,7 +97,14 @@
 			<version>2.0.1</version>
 		</dependency>
 
-		<!-- CHANGE MYSQL TO SELECTED DATABASE JDBC DRIVER -->
+		<!-- CHANGE/ADD/REMOVE JDBC DRIVERS IF NEEDED -->
+		<!-- BUILTIN POSTGRESQL JDBC DRIVER -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.3-1102-jdbc41</version>
+		</dependency>
+		<!-- BUILTIN MYSQL JDBC DRIVER -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -140,7 +154,7 @@
 		<dependency>
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
-			<version>5.0</version>
+			<version>5.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.primefaces.themes</groupId>
