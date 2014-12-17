@@ -1,7 +1,7 @@
 Spring + JSF + JPA Quickstart
 =============================
 
-- Version 1.1.2.GA
+- Version 1.2.0.GA
 
 - What it is: a quickstart project containing initial structure to:
   - Spring Context 4.x as JEE context provider;
@@ -24,11 +24,15 @@ Spring + JSF + JPA Quickstart
 
 - To run:
   - Checkout using Git or SVN;
-  - Configure properties over `src/main/webapp/WEB-INF/database`;
+  - Create a database over your preferred SGBD;
+  - Configure database properties over `src/main/webapp/WEB-INF/database`;
   - Run using Maven 3.x `mvn clean jetty:run`;
 
 What's new
 =============================
+
+- Version 1.2.0.GA
+  - Full support component injection (@Inject and @Autowired) by extending the new utility class InjectionAwareBean;
 
 - Version 1.1.2.GA
   - Change `index.xhtml` to show a `p:datatable` with mock objects;

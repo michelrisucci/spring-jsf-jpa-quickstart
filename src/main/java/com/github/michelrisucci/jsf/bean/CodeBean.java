@@ -6,12 +6,10 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import javax.inject.Inject;
 
 import com.github.michelrisucci.controller.CodeController;
-import com.github.michelrisucci.controller.impl.CodeControllerImpl;
+import com.github.michelrisucci.jsf.bean.support.InjectionAwareBean;
 import com.github.michelrisucci.jsf.model.Code;
 import com.github.michelrisucci.jsf.util.FacesUtils;
 
@@ -20,10 +18,9 @@ import com.github.michelrisucci.jsf.util.FacesUtils;
  */
 @ManagedBean
 @ViewScoped
-public class CodeBean {
+public class CodeBean extends InjectionAwareBean {
 
-	public static final Log log = LogFactory.getLog(CodeBean.class);
-
+	@Inject
 	private CodeController controller;
 
 	private List<Code> items;
@@ -41,7 +38,6 @@ public class CodeBean {
 	@PostConstruct
 	private void postConstruct() {
 		log.info("Bean @PostConstruct called.");
-		controller = FacesUtils.getBeanFromClass(CodeControllerImpl.class);
 		items = controller.list();
 	}
 
@@ -59,14 +55,6 @@ public class CodeBean {
 
 	public void growlError() {
 		FacesUtils.addI18nError("generic.operation.fail");
-	}
-
-	public CodeController getController() {
-		return controller;
-	}
-
-	public void setController(CodeController controller) {
-		this.controller = controller;
 	}
 
 	public List<Code> getItems() {
