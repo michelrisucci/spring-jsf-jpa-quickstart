@@ -212,8 +212,7 @@ public class FacesUtils {
 	/**
 	 * Retrieve an instance of any context bean from {@link FacesContext}.
 	 */
-	public static <T> T getBeanFromClass(Class<T> beanClass) {
-		FacesContext context = getFacesContext();
+	public static <T> T getBeanFromClass(FacesContext context, Class<T> beanClass) {
 		Application application = context.getApplication();
 
 		String beanName = resolveManagedBeanName(beanClass);
@@ -223,6 +222,14 @@ public class FacesUtils {
 
 		return application.evaluateExpressionGet(context,
 				"#{" + beanName + "}", beanClass);
+	}
+
+	/**
+	 * Retrieve an instance of any context bean from {@link FacesContext}.
+	 */
+	public static <T> T getBeanFromClass(Class<T> beanClass) {
+		FacesContext context = getFacesContext();
+		return getBeanFromClass(context, beanClass);
 	}
 
 	private static String resolveManagedBeanName(Class<?> beanClass) {
