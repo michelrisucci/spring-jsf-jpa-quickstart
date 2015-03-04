@@ -104,7 +104,7 @@
 
 	<!-- TRANSACTION MANAGER DEFINITION -->
 	<bean
-		id="jpaTransactionManager"
+		id="transactionManager"
 		class="org.springframework.orm.jpa.JpaTransactionManager"
 	>
 		<property
@@ -113,7 +113,7 @@
 	</bean>
 
 	<!-- TRANSACTION MANAGER CONFIGURATION -->
-	<tx:annotation-driven transaction-manager="jpaTransactionManager" />
+	<tx:annotation-driven transaction-manager="transactionManager" />
 
 	<!-- PROFILE: HIBERNATE -->
 	<beans profile="hibernate">

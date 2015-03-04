@@ -7,7 +7,7 @@
 
 	<groupId>com.github.michelrisucci.jsf</groupId>
 	<artifactId>jsf-quickstart</artifactId>
-	<version>1.2.1.GA</version>
+	<version>1.2.2.GA</version>
 	<packaging>war</packaging>
 
 	<properties>

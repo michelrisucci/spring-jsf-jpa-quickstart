@@ -1,7 +1,7 @@
 Spring + JSF + JPA Quickstart
 =============================
 
-- Version 1.2.1.GA
+- Version 1.2.2.GA
 
 - What it is: a quickstart project containing initial structure to:
   - Spring Context 4.x as JEE context provider;
@@ -30,6 +30,9 @@ Spring + JSF + JPA Quickstart
 
 What's new
 =============================
+
+- Version 1.2.2.GA
+  - Fixed JPA Transaction Manager bean name to conventional "transactionManager".
 
 - Version 1.2.1.GA
   - Added PostgreSQL 9.x JDBC 4.1 driver;
