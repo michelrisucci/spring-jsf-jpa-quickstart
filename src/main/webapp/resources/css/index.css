@@ -1,0 +1,36 @@
+.ui-widget {
+	font-size: small;
+}
+
+.wrapper {
+	max-width: 52em;
+	margin: 0 auto !important;
+}
+
+.ui-grid.ui-grid-form .ui-grid-row:not(:last-child) {
+	padding: 0 0 0.5em 0;
+}
+
+.ui-grid.ui-grid-form .ui-grid-row [class^='ui-grid-col-']:not(:last-child) {
+	padding: 0 0.5em 0 0;
+}
+
+@media (max-width: 35em) {
+	.ui-grid.ui-grid-form .ui-grid-row:not(:last-child) {
+		padding: 0 0 0.5em 0;
+	}
+	
+	.ui-grid.ui-grid-form .ui-grid-row [class^='ui-grid-col-']:not(:last-child) {
+		padding: 0 0 0.5em 0;
+	}
+}
+
+.ui-grid.ui-grid-form input,
+.ui-grid.ui-grid-form label {
+	box-sizing: border-box;
+	display: block;
+}
+
+.ui-grid.ui-grid-form input {
+	width: 100%;
+}

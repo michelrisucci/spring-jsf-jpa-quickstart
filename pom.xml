@@ -7,7 +7,7 @@
 
 	<groupId>com.github.michelrisucci.jsf</groupId>
 	<artifactId>jsf-quickstart</artifactId>
-	<version>1.2.2.GA</version>
+	<version>1.3.0.GA</version>
 	<packaging>war</packaging>
 
 	<properties>
@@ -114,38 +114,38 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>4.3.7.Final</version>
+			<version>4.3.8.Final</version>
 		</dependency>
 
 		<!-- SPRING CONTEXT 4.0.6 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>4.1.3.RELEASE</version>
+			<version>4.1.5.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
-			<version>4.1.3.RELEASE</version>
+			<version>4.1.5.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
-			<version>4.1.3.RELEASE</version>
+			<version>4.1.5.RELEASE</version>
 		</dependency>
 
 		<!-- JSF 2.2.X -->
 		<dependency>
 			<groupId>com.sun.faces</groupId>
 			<artifactId>jsf-api</artifactId>
-			<version>2.2.7</version>
+			<version>2.2.10</version>
 			<!-- SET SCOPE TO "provided" IF SERVER ALREADY EMBED IT -->
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.sun.faces</groupId>
 			<artifactId>jsf-impl</artifactId>
-			<version>2.2.7</version>
+			<version>2.2.10</version>
 			<!-- SET SCOPE TO "provided" IF SERVER ALREADY EMBED IT -->
 			<scope>compile</scope>
 		</dependency>
@@ -160,6 +160,11 @@
 			<groupId>org.primefaces.themes</groupId>
 			<artifactId>all-themes</artifactId>
 			<version>1.0.10</version>
+		</dependency>
+		<dependency>
+			<groupId>org.primefaces.extensions</groupId>
+			<artifactId>primefaces-extensions</artifactId>
+			<version>3.0.0</version>
 		</dependency>
 	</dependencies>
 

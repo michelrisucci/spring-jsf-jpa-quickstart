@@ -1,7 +1,7 @@
 Spring + JSF + JPA Quickstart
 =============================
 
-- Version 1.2.2.GA
+- Version 1.3.0.GA
 
 - What it is: a quickstart project containing initial structure to:
   - Spring Context 4.x as JEE context provider;
@@ -17,6 +17,7 @@ Spring + JSF + JPA Quickstart
     - Derby;
     - and many more...
   - Hibernate 4.x as JPA 2.1 provider (switchable to EclipseLink if convenient - see web.xml);
+  - Full-featured CRUD operations over an entity;
   - Internationalization;
   - Bean utilities;
   - Primefaces Twitter Bootstrap Theme.
@@ -30,6 +31,16 @@ Spring + JSF + JPA Quickstart
 
 What's new
 =============================
+
+- Version 1.3.0.GA
+  - Added a full-featured CRUD operations example: possibility to READ over a table, CREATE, EDIT and DELETE entries;
+  - Changed default entity from "Code" to "Country", with properties:
+    - Name (text);
+    - Acronym (text);
+    - Population (numeric);
+  - Added a Spring application context listener that automatically adds mock data to database;
+  - Moved internal page CSS to an external file at the `resources` folder;
+  - Updated dependencies versions.
 
 - Version 1.2.2.GA
   - Fixed JPA Transaction Manager bean name to conventional "transactionManager".
