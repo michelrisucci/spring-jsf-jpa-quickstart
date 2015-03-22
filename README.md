@@ -51,7 +51,7 @@ What's new
   - Updated Primefaces version to 5.1.
 
 - Version 1.2.0.GA
-  - Full support component injection (@Inject and @Autowired) by extending the new utility class InjectionAwareBean.
+  - Full support component injection (@Inject and @Autowired) by extending <del>the new utility class InjectionAwareBean</del> Spring context's `SpringBeanAutowiringSupport` utility class. 
 
 - Version 1.1.2.GA
   - Changed `index.xhtml` to show a `p:datatable` with mock objects;
