@@ -62,7 +62,7 @@
 			<plugin>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
-				<version>9.2.6.v20141205</version>
+				<version>9.2.10.v20150310</version>
 				<configuration>
 					<webAppSourceDirectory>${webapp.directory}</webAppSourceDirectory>
 					<webApp>
@@ -121,17 +121,17 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>4.1.5.RELEASE</version>
+			<version>4.1.6.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
-			<version>4.1.5.RELEASE</version>
+			<version>4.1.6.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
-			<version>4.1.5.RELEASE</version>
+			<version>4.1.6.RELEASE</version>
 		</dependency>
 
 		<!-- JSF 2.2.X -->
