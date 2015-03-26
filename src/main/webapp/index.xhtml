@@ -58,6 +58,7 @@
 									action="#{countryBean.clearItem}"
 									icon="ui-icon-plus"
 									update="@form"
+									resetValues="true"
 								>
 									<f:setPropertyActionListener
 										target="#{countryBean.state}"
@@ -105,6 +106,7 @@
 										icon="ui-icon-pencil"
 										process="@this"
 										update="@form"
+										resetValues="true"
 										immediate="true"
 									>
 										<f:setPropertyActionListener

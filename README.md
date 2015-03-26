@@ -1,7 +1,7 @@
 Spring + JSF + JPA Quickstart
 =============================
 
-- Version 1.3.0.GA
+- Version 1.3.1.GA
 
 - What it is: a quickstart project containing initial structure to:
   - Spring Context 4.x as JEE context provider;
@@ -31,6 +31,9 @@ Spring + JSF + JPA Quickstart
 
 What's new
 =============================
+
+- Version 1.3.1.GA
+  - Fixed a bug in the edition form that, in some circumstances, was keeping outdated validation data: added attribute resetValues="true" to the insertion and edition action buttons. 
 
 - Version 1.3.0.GA
   - Added a full-featured CRUD operations example: possibility to READ over a table, CREATE, EDIT and DELETE entries;
