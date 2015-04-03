@@ -108,8 +108,15 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.34</version>
+			<version>5.1.35</version>
 		</dependency>
+		<!-- BUILTIN H2 JDBC DRIVER -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.186</version>
+		</dependency>
+
 		<!-- CHANGE HIBERNATE TO ECLIPSELINK IF CONVENIENT (CHANGE PROFILE IN WEB.XML) -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
