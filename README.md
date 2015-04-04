@@ -1,4 +1,5 @@
-Spring + JSF + JPA Quickstart [![Build Status](https://travis-ci.org/michelrisucci/spring-jsf-jpa-quickstart.svg?branch=master)](https://travis-ci.org/michelrisucci/spring-jsf-jpa-quickstart)
+[![Build Status](https://travis-ci.org/michelrisucci/spring-jsf-jpa-quickstart.svg?branch=master)](https://travis-ci.org/michelrisucci/spring-jsf-jpa-quickstart)
+Spring + JSF + JPA Quickstart
 =============================
 
 - Version 1.4.0.GA
