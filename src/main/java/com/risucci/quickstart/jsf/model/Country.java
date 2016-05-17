@@ -1,4 +1,4 @@
-package com.github.michelrisucci.jsf.model;
+package com.risucci.quickstart.jsf.model;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;

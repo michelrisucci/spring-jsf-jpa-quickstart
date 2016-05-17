@@ -1,4 +1,4 @@
-package com.github.michelrisucci.jsf.bean;
+package com.risucci.quickstart.jsf.bean;
 
 import java.util.List;
 
@@ -13,9 +13,9 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
-import com.github.michelrisucci.controller.CountryController;
-import com.github.michelrisucci.jsf.model.Country;
-import com.github.michelrisucci.jsf.util.FacesUtils;
+import com.risucci.quickstart.controller.CountryController;
+import com.risucci.quickstart.jsf.model.Country;
+import com.risucci.quickstart.jsf.util.FacesUtils;
 
 /**
  * Making the JSF bean extend {@link SpringBeanAutowiringSupport} is the best

@@ -1,4 +1,4 @@
-package com.github.michelrisucci.listener;
+package com.risucci.quickstart.listener;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,7 +13,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.github.michelrisucci.jsf.model.Country;
+import com.risucci.quickstart.jsf.model.Country;
 
 /**
  * Spring application context loader that checks if database has initial data.

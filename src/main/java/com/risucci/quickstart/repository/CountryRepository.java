@@ -1,8 +1,8 @@
-package com.github.michelrisucci.repository;
+package com.risucci.quickstart.repository;
 
 import java.util.List;
 
-import com.github.michelrisucci.jsf.model.Country;
+import com.risucci.quickstart.jsf.model.Country;
 
 /**
  * @author Michel Risucci

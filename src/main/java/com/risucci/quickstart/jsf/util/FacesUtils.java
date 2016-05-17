@@ -1,4 +1,4 @@
-package com.github.michelrisucci.jsf.util;
+package com.risucci.quickstart.jsf.util;
 
 import java.text.MessageFormat;
 import java.util.Locale;

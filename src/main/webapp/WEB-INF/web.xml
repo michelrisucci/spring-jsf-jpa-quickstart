@@ -9,8 +9,13 @@
 
 	<!-- WELCOME FILES -->
 	<welcome-file-list>
-		<welcome-file>index.xhtml</welcome-file>
+		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
+
+	<!-- FACES CONFIGURE LISTENER - MOJARRA REQUIRED -->
+	<listener>
+		<listener-class>com.sun.faces.config.ConfigureListener</listener-class>
+	</listener>
 
 	<!-- JSF FACES SERVLET -->
 	<servlet>
@@ -25,35 +30,9 @@
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
 
-	<!-- FACES CONFIGURE LISTENER - MOJARRA REQUIRED -->
-	<listener>
-		<listener-class>com.sun.faces.config.ConfigureListener</listener-class>
-	</listener>
-
-	<!-- SPRING CONTEXT LOADER LISTENER -->
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>
-			/WEB-INF/application-context.xml
-			/WEB-INF/database/database-context.xml
-		</param-value>
-	</context-param>
-	<!-- SPRING BEAN PROFILES -->
-	<!-- PROFILE 'hibernate' ACTIVATES HIBERNATE AS JPA PROVIDER -->
-	<!-- PROFILE 'eclipselink' ACTIVATES ECLIPSELINK AS JPA PROVIDER -->
-	<!-- OTHER PROFILES CAN BE ACTIVATED USING COMMA, LIKE THIS: 'p1,p2,p3' -->
-	<context-param>
-		<param-name>spring.profiles.active</param-name>
-		<param-value>hibernate</param-value>
-	</context-param>
-
-	<!-- PRIMEFACES THEME -->
-	<context-param>
-		<param-name>primefaces.THEME</param-name>
-		<param-value>bootstrap</param-value>
-	</context-param>
+	<!-- SERVLET SESSION CONFIGURATION -->
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
 
 </web-app>

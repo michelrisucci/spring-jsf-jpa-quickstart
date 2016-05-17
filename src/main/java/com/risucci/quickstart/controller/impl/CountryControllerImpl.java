@@ -1,4 +1,4 @@
-package com.github.michelrisucci.controller.impl;
+package com.risucci.quickstart.controller.impl;
 
 import java.util.List;
 
@@ -8,9 +8,9 @@ import javax.inject.Named;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.github.michelrisucci.controller.CountryController;
-import com.github.michelrisucci.jsf.model.Country;
-import com.github.michelrisucci.repository.CountryRepository;
+import com.risucci.quickstart.controller.CountryController;
+import com.risucci.quickstart.jsf.model.Country;
+import com.risucci.quickstart.repository.CountryRepository;
 
 /**
  * @author Michel Risucci

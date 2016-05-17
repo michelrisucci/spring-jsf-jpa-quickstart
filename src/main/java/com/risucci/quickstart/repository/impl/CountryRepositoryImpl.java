@@ -1,4 +1,4 @@
-package com.github.michelrisucci.repository.impl;
+package com.risucci.quickstart.repository.impl;
 
 import java.util.List;
 
@@ -9,8 +9,8 @@ import javax.persistence.PersistenceContext;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.github.michelrisucci.jsf.model.Country;
-import com.github.michelrisucci.repository.CountryRepository;
+import com.risucci.quickstart.jsf.model.Country;
+import com.risucci.quickstart.repository.CountryRepository;
 
 /**
  * @author Michel Risucci
