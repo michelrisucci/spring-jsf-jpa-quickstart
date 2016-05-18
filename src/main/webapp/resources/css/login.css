@@ -1,0 +1,47 @@
+body {
+	padding-top: 12em;
+	background-color: #fff;
+}
+
+form#loginForm {
+	max-width: 24em;
+	padding: 0;
+	margin: 0 auto;
+}
+
+form#loginForm .form-signin-heading, form#loginForm .checkbox {
+	margin-bottom: 1em;
+}
+
+form#loginForm {
+	font-weight: normal;
+}
+
+form#loginForm .form-control {
+	position: relative;
+	height: auto;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 1em;
+	font-size: 1em;
+}
+
+form#loginForm .form-control:focus {
+	z-index: 10;
+}
+
+form#loginForm input#username {
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+form#loginForm input#password {
+	margin-top: -1px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
+form#loginForm input#signin {
+	margin-top: 1em;
+}

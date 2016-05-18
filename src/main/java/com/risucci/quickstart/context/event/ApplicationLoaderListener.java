@@ -1,4 +1,4 @@
-package com.risucci.quickstart.listener;
+package com.risucci.quickstart.context.event;
 
 import java.util.Arrays;
 import java.util.List;

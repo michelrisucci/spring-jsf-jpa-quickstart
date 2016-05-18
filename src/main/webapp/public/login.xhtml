@@ -1,0 +1,66 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	template="/WEB-INF/templates/main.xhtml"
+>
+
+	<ui:define name="content">
+		<!-- IMPORT CSS -->
+		<h:outputStylesheet
+			library="css"
+			name="login.css"
+		/>
+
+		<!-- CONTENT -->
+		<div class="container">
+			<!-- LOGIN FORM -->
+			<h:form
+				id="loginForm"
+				prependId="false"
+			>
+				<h2 class="form-signin-heading">Sign in to Quickstart</h2>
+
+				<!-- USERNAME -->
+				<h:outputLabel
+					for="username"
+					value="Username"
+					styleClass="sr-only"
+				/>
+				<h:inputText
+					id="username"
+					styleClass="form-control"
+					a:placeholder="Username"
+					a:required="required"
+					a:autofocus="autofocus"
+				/>
+
+				<!-- PASSWORD -->
+				<h:outputLabel
+					for="password"
+					value="Password"
+					styleClass="sr-only"
+				/>
+				<h:inputSecret
+					id="password"
+					styleClass="form-control"
+					a:placeholder="Password"
+					a:required="required"
+					a:autofocus="autofocus"
+				/>
+
+				<!-- SUBMIT BUTTON -->
+				<h:commandButton
+					id="signin"
+					value="Sign In"
+					styleClass="btn btn-lg btn-primary btn-block"
+				/>
+			</h:form>
+		</div>
+	</ui:define>
+
+</ui:composition>
