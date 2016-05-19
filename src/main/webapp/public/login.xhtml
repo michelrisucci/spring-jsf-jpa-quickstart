@@ -59,6 +59,19 @@
 					value="Sign In"
 					styleClass="btn btn-lg btn-primary btn-block"
 				/>
+
+				<!-- LOGOUT MESSAGE -->
+				<h:panelGroup
+					layout="block"
+					styleClass="alert alert-info alert-dismissible"
+					rendered="#{param['source'] eq 'logout'}"
+					a:role="alert"
+				>
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&#215;</span>
+					</button>
+					<h:outputText value="Logout successfully." />
+				</h:panelGroup>
 			</h:form>
 		</div>
 	</ui:define>

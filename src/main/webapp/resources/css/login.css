@@ -43,5 +43,5 @@ form#loginForm input#password {
 }
 
 form#loginForm input#signin {
-	margin-top: 1em;
+	margin: 1em 0;
 }

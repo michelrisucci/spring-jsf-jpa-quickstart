@@ -28,11 +28,20 @@ public class WebApplicationSecurityConfigurerAdapter extends WebSecurityConfigur
 				.antMatchers("/index.html").permitAll() //
 				.antMatchers("/public/**", "/resources/**", "/javax.faces.resource/**").permitAll();
 
-		// Security policy: protecting all remaining paths
+		// Security policy: protecting all remaining paths.
 		http.authorizeRequests() //
 				.anyRequest().authenticated();
 
-		// Security policy: disabling CSRF protection
+		// Logout handling.
+		http.logout() //
+				.logoutUrl("/logout") //
+				.logoutSuccessUrl("/public/login.xhtml?source=logout") //
+				.permitAll();
+
+		/*
+		 * Security policy: disabling CSRF protection. We must use it, but for
+		 * now, I prefer to disable it to prevent more configuration overloads.
+		 */
 		http.csrf().disable();
 	}
 

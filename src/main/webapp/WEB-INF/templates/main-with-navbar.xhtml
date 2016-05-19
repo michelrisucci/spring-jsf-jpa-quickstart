@@ -1,0 +1,74 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	template="/WEB-INF/templates/main.xhtml"
+>
+
+	<ui:define name="content">
+		<!-- IMPORT CSS -->
+		<h:outputStylesheet
+			library="css"
+			name="main-with-navbar.css"
+		/>
+
+		<!-- CONTAINER -->
+		<div id="main" class="container">
+
+			<!-- NAVIGATION -->
+			<nav class="navbar navbar-default">
+				<div class="container-fluid">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarCollapse" aria-expanded="false">
+							<span class="sr-only">Toggler</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="#{request.contextPath}/protected/index.xhtml">Quickstart</a>
+					</div>
+
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div id="navbarCollapse" class="collapse navbar-collapse">
+						<ul class="nav navbar-nav">
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Manage <span class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<li>
+										<h:outputLink value="#{request.contextPath}/protected/manage/country.xhtml">
+											<h:outputText value="Country" />
+										</h:outputLink>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<form class="navbar-form navbar-left" role="search">
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="Search" />
+							</div>
+							<button type="submit" class="btn btn-default">Submit</button>
+						</form>
+						<ul class="nav navbar-nav navbar-right">
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Account <span class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<li>
+										<h:outputLink value="#{request.contextPath}/logout">
+											<h:outputText value="Logout" />
+										</h:outputLink>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+			<ui:insert name="body" />
+		</div>
+	</ui:define>
+</ui:composition>
