@@ -1,0 +1,25 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	template="/WEB-INF/templates/main-with-navbar.xhtml"
+>
+	<ui:define name="body">
+		<!-- EDITION -->
+		<h:panelGroup styleClass="form-group">
+			<h:outputLabel
+				for="nameInput"
+				value="Name"
+			/>
+			<h:inputText
+				id="nameInput"
+				value="#{countryBean.item.name}"
+				styleClass="form-control"
+			/>
+		</h:panelGroup>
+	</ui:define>
+</ui:composition>

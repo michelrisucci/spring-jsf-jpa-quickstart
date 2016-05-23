@@ -1,16 +1,20 @@
 package com.risucci.quickstart.jsf.bean;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowire;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import com.risucci.quickstart.controller.CountryController;
@@ -19,9 +23,9 @@ import com.risucci.quickstart.jsf.util.FacesUtils;
 
 /**
  * Making the JSF bean extend {@link SpringBeanAutowiringSupport} is the best
- * way to seamlessly integrate JSF Context with Spring Context, enabling
- * features like DI via @{@link Inject} and @{@link Autowire} . Spring does not
- * provide a powerful built-in JSF integration module.
+ * way to seamlessly integrate JSF Context with Spring, enabling features like
+ * DI via @{@link Inject} or @{@link Autowire}. Spring does not provide a
+ * powerful built-in JSF integration module.
  * 
  * @author Michel Risucci
  */
@@ -31,10 +35,9 @@ public class CountryBean extends SpringBeanAutowiringSupport {
 
 	protected static final Log log = LogFactory.getLog(CountryBean.class);
 
-	@Inject
+	@Autowired
 	private CountryController controller;
 
-	private String state;
 	private List<Country> items;
 	private Country item;
 
@@ -51,8 +54,21 @@ public class CountryBean extends SpringBeanAutowiringSupport {
 	@PostConstruct
 	private void postConstruct() {
 		log.info("Bean @PostConstruct called.");
-		state = "READ";
+
+		String id = getRequestParameter("id");
+		if (id != null) {
+			System.out.println("ID = " + id);
+			this.item = controller.read(Long.valueOf(id));
+		}
+
 		items = controller.list();
+	}
+
+	private String getRequestParameter(String key) {
+		FacesContext fc = FacesContext.getCurrentInstance();
+		ExternalContext ec = fc.getExternalContext();
+		Map<String, String> rp = ec.getRequestParameterMap();
+		return rp.get(key);
 	}
 
 	/**
@@ -111,14 +127,6 @@ public class CountryBean extends SpringBeanAutowiringSupport {
 	/*
 	 * Getters and Setters
 	 */
-
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}
 
 	public List<Country> getItems() {
 		return items;

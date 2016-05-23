@@ -1,0 +1,117 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	template="/WEB-INF/templates/main-with-navbar.xhtml"
+>
+	<ui:define name="body">
+		<script type="text/javascript">
+			function removeActionHandler(event) {
+				console.log(event);
+				// event.status --> begin/complete/success;
+				if (event.status == "success") {
+					$('#myModal').modal();
+				}
+			}
+			function removeActionErrorHandler(event) {
+				console.log(event);
+			}
+		</script>
+
+		<!-- DATATABLE -->
+		<h:dataTable
+			id="viewDataTable"
+			value="#{countryBean.items}"
+			var="i"
+			styleClass="table table-striped"
+			columnClasses="text-center,text-left,text-left,text-right"
+		>
+			<h:column headerClass="text-center">
+				<f:facet name="header">
+					<h:outputText value="#" />
+				</f:facet>
+				<h:outputText value="#{i.id}" />
+			</h:column>
+			<h:column headerClass="text-left">
+				<f:facet name="header">
+					<h:outputText value="Name" />
+				</f:facet>
+				<h:outputText value="#{i.name}" />
+			</h:column>
+			<h:column headerClass="text-left">
+				<f:facet name="header">
+					<h:outputText value="Acronym" />
+				</f:facet>
+				<h:outputText value="#{i.acronym}" />
+			</h:column>
+			<h:column headerClass="text-left">
+				<f:facet name="header">
+					<h:outputText value="Population" />
+				</f:facet>
+				<h:outputText value="#{i.population}">
+					<f:convertNumber type="number" />
+				</h:outputText>
+			</h:column>
+			<h:column headerClass="text-left">
+				<f:facet name="header">
+					<h:outputText value="Actions" />
+				</f:facet>
+				<h:form id="actionForm">
+					<h:outputLink
+						id="editAction"
+						styleClass="btn btn-xs btn-warning"
+						role="button"
+						value="#{request.contextPath}/protected/manage/country-edit.xhtml?id=#{i.id}"
+					>
+						<h:outputText styleClass="glyphicon glyphicon-pencil" />
+					</h:outputLink>
+					<h:outputText value="&#160;" />
+					<button
+						type="button"
+						class="btn btn-xs btn-danger"
+						data-toggle="modal"
+						data-target="#myModal"
+					>
+						<h:outputText styleClass="glyphicon glyphicon-trash" />
+					</button>
+					<h:outputText value="&#160;" />
+					<h:commandLink
+						id="removeAction"
+						role="button"
+						styleClass="btn btn-xs btn-danger"
+					>
+						<f:ajax
+							execute="@this"
+							render=":removeDialog"
+							listener="#{countryBean.setItem(i)}"
+							onevent="removeActionHandler"
+							onerror="removeActionErrorHandler"
+						/>
+						<h:outputText styleClass="glyphicon glyphicon-plus" />
+					</h:commandLink>
+				</h:form>
+			</h:column>
+		</h:dataTable>
+
+		<!-- INCLUDING MODAL -->
+		<h:panelGroup
+			id="removeDialog"
+			layout="block"
+		>
+			<ui:include src="/WEB-INF/templates/remove-dialog.xhtml">
+				<ui:param
+					name="itemLabel"
+					value="#{countryBean.item.name}"
+				/>
+				<ui:param
+					name="deleteActionListener"
+					value="#{countryBean.delete}"
+				/>
+			</ui:include>
+		</h:panelGroup>
+	</ui:define>
+</ui:composition>
