@@ -12,12 +12,17 @@
 		<script type="text/javascript">
 			function removeActionHandler(event) {
 				console.log(event);
-				// event.status --> begin/complete/success;
-				if (event.status == "success") {
-					$('#myModal').modal();
+				switch (event.status) {
+					case "begin":
+						break;
+					case "success":
+						$('#myModal').modal();
+						break;
+					case "complete":
+						break;
 				}
 			}
-			function removeActionErrorHandler(event) {
+			function defaultErrorHandler(event) {
 				console.log(event);
 			}
 		</script>
@@ -70,15 +75,6 @@
 						<h:outputText styleClass="glyphicon glyphicon-pencil" />
 					</h:outputLink>
 					<h:outputText value="&#160;" />
-					<button
-						type="button"
-						class="btn btn-xs btn-danger"
-						data-toggle="modal"
-						data-target="#myModal"
-					>
-						<h:outputText styleClass="glyphicon glyphicon-trash" />
-					</button>
-					<h:outputText value="&#160;" />
 					<h:commandLink
 						id="removeAction"
 						role="button"
@@ -86,10 +82,10 @@
 					>
 						<f:ajax
 							execute="@this"
-							render=":removeDialog"
+							render=":removeMessage"
 							listener="#{countryBean.setItem(i)}"
 							onevent="removeActionHandler"
-							onerror="removeActionErrorHandler"
+							onerror="defaultErrorHandler"
 						/>
 						<h:outputText styleClass="glyphicon glyphicon-plus" />
 					</h:commandLink>
@@ -97,21 +93,52 @@
 			</h:column>
 		</h:dataTable>
 
-		<!-- INCLUDING MODAL -->
-		<h:panelGroup
-			id="removeDialog"
-			layout="block"
-		>
-			<ui:include src="/WEB-INF/templates/remove-dialog.xhtml">
-				<ui:param
-					name="itemLabel"
-					value="#{countryBean.item.name}"
-				/>
-				<ui:param
-					name="deleteActionListener"
-					value="#{countryBean.delete}"
-				/>
-			</ui:include>
-		</h:panelGroup>
+		<!-- MODAL -->
+		<script type="text/javascript">
+			function confirmRemoveActionHandler(event) {
+				switch (event.status) {
+					case "begin":
+						break;
+					case "success":
+						$('#myModal').modal("hide");
+						break;
+					case "complete":
+						break;
+				}
+			}
+		</script>
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog modal-sm" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&#215;</span></button>
+						<h4 class="modal-title" id="myModalLabel">#{i18n['operations.delete']}</h4>
+					</div>
+					<div class="modal-body">
+						<h:outputFormat id="removeMessage" value="#{i18n['operations.delete.areYouSure']}">
+							<f:param value="#{countryBean.item.name}" />
+						</h:outputFormat>
+					</div>
+					<div class="modal-footer">
+						<h:form id="actionsForm">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<h:commandButton
+								id="removeButton"
+								value="#{i18n['button.remove']}"
+								styleClass="btn btn-danger"
+							>
+								<f:ajax
+									listener="#{countryBean.delete}"
+									execute="@this"
+									render=":viewDataTable"
+									onevent="confirmRemoveActionHandler"
+									onerror="defaultErrorHandler"
+								/>
+							</h:commandButton>
+						</h:form>
+					</div>
+				</div>
+			</div>
+		</div>
 	</ui:define>
 </ui:composition>
