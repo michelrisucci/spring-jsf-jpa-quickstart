@@ -19,4 +19,5 @@ public enum FacesMessageSeverity {
 	public Severity getSeverity() {
 		return severity;
 	}
+
 }

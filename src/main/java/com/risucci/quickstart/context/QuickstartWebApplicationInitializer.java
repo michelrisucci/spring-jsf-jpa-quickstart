@@ -8,8 +8,9 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 import com.risucci.quickstart.context.adapter.WebApplicationConfigurerAdapter;
 import com.risucci.quickstart.context.adapter.WebApplicationSecurityConfigurerAdapter;
 
+
 @Configuration
-@ComponentScan(basePackages = { "com.risucci.quickstart.*" })
+@ComponentScan(basePackages = { "com.risucci.quickstart" })
 @Order(1)
 public class QuickstartWebApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 

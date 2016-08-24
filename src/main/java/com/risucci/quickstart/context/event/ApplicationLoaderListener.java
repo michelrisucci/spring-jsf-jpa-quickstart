@@ -3,17 +3,13 @@ package com.risucci.quickstart.context.event;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.inject.Named;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Component;
 
 import com.risucci.quickstart.jsf.model.Country;
+import com.risucci.quickstart.repository.CountryRepository;
 
 /**
  * Spring application context loader that checks if database has initial data.
@@ -21,36 +17,23 @@ import com.risucci.quickstart.jsf.model.Country;
  * 
  * @author Michel Risucci
  */
-@Named
-public class ApplicationLoaderListener implements
-		ApplicationListener<ContextRefreshedEvent> {
+@Component
+public class ApplicationLoaderListener implements ApplicationListener<ContextRefreshedEvent> {
 
-	@PersistenceContext
-	private EntityManager em;
+	private CountryRepository countryRepository;
 
 	@Override
-	@Transactional(propagation = Propagation.REQUIRED)
 	public void onApplicationEvent(ContextRefreshedEvent event) {
-		checkDatabase();
-	}
-
-	private void checkDatabase() {
-		StringBuilder jpql = new StringBuilder() //
-				.append("SELECT COUNT(x) ") //
-				.append("FROM " + Country.class.getSimpleName() + " x ");
-
-		TypedQuery<Number> query = em
-				.createQuery(jpql.toString(), Number.class);
-
-		long count = query.getSingleResult().longValue();
-		if (count == 0) {
-			initializeDatabaseWithMockData();
+		ApplicationContext context = event.getApplicationContext();
+		if (context.getParent() != null) {
+			this.countryRepository = context.getBean(CountryRepository.class);
+			long count = countryRepository.count();
+			if (count == 0) {
+				initializeDatabaseWithMockData();
+			}
 		}
 	}
 
-	/**
-	 * 
-	 */
 	private void initializeDatabaseWithMockData() {
 		List<Country> countries = Arrays.asList( //
 				new Country("Brazil", "BRA", 200_000_000l), //
@@ -59,9 +42,7 @@ public class ApplicationLoaderListener implements
 				new Country("China", "CHN", 1_350_000_000l), //
 				new Country("India", "IND", 1_250_000_000l));
 
-		for (Country country : countries) {
-			em.persist(country);
-		}
+		countryRepository.save(countries);
 	}
 
 }

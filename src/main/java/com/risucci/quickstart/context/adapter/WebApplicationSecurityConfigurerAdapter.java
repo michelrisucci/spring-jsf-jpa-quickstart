@@ -49,7 +49,7 @@ public class WebApplicationSecurityConfigurerAdapter extends WebSecurityConfigur
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.inMemoryAuthentication() //
 				.withUser("admin") //
-				.password("123") //
+				.password("123456") //
 				.roles("ADMIN");
 	}
 

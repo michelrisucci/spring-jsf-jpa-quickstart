@@ -1,8 +1,4 @@
-<project
-	xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.risucci</groupId>
@@ -27,23 +23,12 @@
 				</configuration>
 			</plugin>
 
-			<!-- WAR PLUGIN - WEB PROJECT DEFINITIONS -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>2.6</version>
-				<configuration>
-					<failOnMissingWebXml>true</failOnMissingWebXml>
-				</configuration>
-			</plugin>
-
 			<!-- JETTY PLUGIN - WEB SERVER -->
 			<plugin>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>9.3.8.v20160314</version>
 				<configuration>
-					<webAppSourceDirectory>src/main/webapp</webAppSourceDirectory>
 					<webApp>
 						<contextPath>/jsf</contextPath>
 					</webApp>
@@ -57,7 +42,7 @@
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-framework-bom</artifactId>
-				<version>4.2.6.RELEASE</version>
+				<version>4.3.2.RELEASE</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -65,7 +50,7 @@
 			<dependency>
 				<groupId>org.springframework.security</groupId>
 				<artifactId>spring-security-bom</artifactId>
-				<version>4.1.0.RELEASE</version>
+				<version>4.1.3.RELEASE</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -73,20 +58,12 @@
 	</dependencyManagement>
 
 	<dependencies>
-		<!-- JAVAEE WEB API -->
+		<!-- SERVLET API - APPLICATION SERVER PROVIDES -->
 		<dependency>
-			<groupId>javax</groupId>
-			<artifactId>javaee-web-api</artifactId>
-			<version>7.0</version>
-			<!-- SET SCOPE TO 'provided' IF SERVER ALREADY EMBEDS IT -->
-			<scope>compile</scope>
-		</dependency>
-
-		<!-- APACHE COMMONS LANG -->
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>3.4</version>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<!-- APACHE COMMONS DBCP: DATABASE -->
@@ -96,30 +73,30 @@
 			<version>2.1.1</version>
 		</dependency>
 
+		<!-- BUILTIN H2 JDBC DRIVER -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.192</version>
+		</dependency>
 		<!-- BUILTIN POSTGRESQL JDBC DRIVER -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
-			<version>9.4.1208.jre7</version>
+			<version>9.4.1209.jre7</version>
 		</dependency>
 		<!-- BUILTIN MYSQL JDBC DRIVER -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.39</version>
-		</dependency>
-		<!-- BUILTIN H2 JDBC DRIVER -->
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<version>1.4.191</version>
+			<version>6.0.3</version>
 		</dependency>
 
-		<!-- CHANGE HIBERNATE TO ECLIPSELINK IF CONVENIENT (CHANGE PROFILE IN WEB.XML) -->
+		<!-- HIBERNATE AS JPA PROVIDER -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>5.1.0.Final</version>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.2.2.Final</version>
 		</dependency>
 
 		<!-- SPRING -->
@@ -134,6 +111,11 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-tx</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+			<version>1.10.2.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>

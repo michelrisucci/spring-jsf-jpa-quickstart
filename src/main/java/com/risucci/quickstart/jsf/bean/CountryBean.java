@@ -4,28 +4,24 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Inject;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
-import com.risucci.quickstart.controller.CountryController;
 import com.risucci.quickstart.jsf.model.Country;
-import com.risucci.quickstart.jsf.util.FacesUtils;
+import com.risucci.quickstart.repository.CountryRepository;
 
 /**
- * Making the JSF bean extend {@link SpringBeanAutowiringSupport} is the best
- * way to seamlessly integrate JSF Context with Spring, enabling features like
- * DI via @{@link Inject} or @{@link Autowire}. Spring does not provide a
- * powerful built-in JSF integration module.
+ * Making the JSF bean extend {@link SpringBeanAutowiringSupport} is the
+ * simplest way to seamlessly integrate JSF Context with Spring, enabling
+ * features like DI via @{@link Inject} or @{@link Autowired}. Spring does not
+ * provide a powerful built-in JSF integration module.
  * 
  * @author Michel Risucci
  */
@@ -33,95 +29,33 @@ import com.risucci.quickstart.jsf.util.FacesUtils;
 @ViewScoped
 public class CountryBean extends SpringBeanAutowiringSupport {
 
-	protected static final Log log = LogFactory.getLog(CountryBean.class);
-
 	@Autowired
-	private CountryController controller;
+	private CountryRepository repository;
 
 	private List<Country> items;
 	private Country item;
 
-	/**
-	 * 
-	 */
-	public CountryBean() {
-		log.info("Bean constructor called.");
-	}
-
-	/**
-	 * 
-	 */
 	@PostConstruct
 	private void postConstruct() {
-		log.info("Bean @PostConstruct called.");
-
-		String id = getRequestParameter("id");
-		if (id != null) {
-			System.out.println("ID = " + id);
-			this.item = controller.read(Long.valueOf(id));
-		}
-
-		items = controller.list();
-	}
-
-	private String getRequestParameter(String key) {
 		FacesContext fc = FacesContext.getCurrentInstance();
 		ExternalContext ec = fc.getExternalContext();
 		Map<String, String> rp = ec.getRequestParameterMap();
-		return rp.get(key);
-	}
 
-	/**
-	 * Clears entity items
-	 */
-	public void clearItems() {
-		if (items != null) {
-			items.clear();
+		String id = rp.get("id");
+		if (id != null) {
+			System.out.println("ID = " + id);
+			this.item = repository.findOne(Long.valueOf(id));
 		}
+
+		items = repository.findAll();
 	}
 
-	/**
-	 * Clears entity item
-	 */
-	public void clearItem() {
-		try {
-			// Instantiating via reflection was used here for generic purposes
-			item = Country.class.newInstance();
-		} catch (InstantiationException | IllegalAccessException e) {
-			FacesUtils.addI18nError("generic.bean.unableToCleanViewData");
-		}
+	public void save(AjaxBehaviorEvent event) {
+		repository.save(item);
 	}
 
-	/**
-	 * @param event
-	 */
-	public void create() {
-		controller.create(item);
-		items = controller.list();
-		item = null;
-	}
-
-	/**
-	 * @param event
-	 */
-	public void update() {
-		controller.update(item);
-		items = controller.list();
-		item = null;
-	}
-
-	public void delete() {
-		controller.delete(item.getId());
-		items = controller.list();
-		item = null;
-	}
-
-	/**
-	 * 
-	 */
-	@PreDestroy
-	private void preDestroy() {
-		log.info("Bean @PreDestroy called.");
+	public void delete(AjaxBehaviorEvent event) {
+		repository.delete(item.getId());
 	}
 
 	/*
