@@ -1,10 +1,60 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:cc="http://xmlns.jcp.org/jsf/composite" xmlns:jsf="http://xmlns.jcp.org/jsf" xmlns:a="http://xmlns.jcp.org/jsf/passthrough" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions" template="/WEB-INF/templates/main-with-nav.xhtml">
 	<ui:define name="body">
-		<h:form id="dataTableForm">
-			<div class="panel panel-default">
+
+		<!-- FILTER -->
+		<div class="panel panel-default">
+			<div class="panel-heading" role="tab" id="filterHeading">
+				<a role="button" class="panel-title" href="#collapseFilter" data-toggle="collapse" aria-expanded="true" aria-controls="collapseFilter">
+					<i class="glyphicon glyphicon-filter"></i> <span>Filter</span>
+				</a>
+			</div>
+			<div id="collapseFilter" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="filterHeading">
 				<div class="panel-body">
+					<h:form id="filterForm">
+						<div class="row">
+							<div class="col-xs-4">
+								<div class="form-group">
+									<h:outputLabel for="nameInput" value="Name" />
+									<h:inputText id="nameInput" styleClass="form-control input-sm" value="#{countryBean.item.name}" />
+								</div>
+							</div>
+							<div class="col-xs-4">
+								<div class="form-group">
+									<h:outputLabel for="acronymInput" value="Acronym" />
+									<h:inputText id="acronymInput" styleClass="form-control input-sm" value="#{countryBean.item.acronym}" />
+								</div>
+							</div>
+							<div class="col-xs-4">
+								<div class="form-group">
+									<h:outputLabel for="populationInput" value="Population" />
+									<h:inputText id="populationInput" styleClass="form-control input-sm" value="#{countryBean.item.population}" a:type="number" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-12">
+								<button jsf:id="doFilterButton" type="submit" class="btn btn-sm btn-primary">
+									<i class="glyphicon glyphicon-filter"></i> <span>Filter</span>
+									<f:ajax event="click" listener="#{countryBean.filter}" execute="@form" render=":dataTableForm" />
+								</button>
+								<h:outputText value="&#160;" />
+								<button jsf:id="eraseFilterButton" type="submit" class="btn btn-sm btn-warning">
+									<i class="glyphicon glyphicon-erase"></i> <span>Erase</span>
+									<f:ajax event="click" listener="#{countryBean.eraseFilter}" execute="@form" render="@form :dataTableForm" />
+								</button>
+							</div>
+						</div>
+					</h:form>
+				</div>
+			</div>
+		</div>
+
+		<!-- DATATABLE -->
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<h:form id="dataTableForm">
 					<div class="table-responsive">
-						<h:dataTable id="crudDataTable" value="#{countryBean.items}" var="x" styleClass="table table-hover" columnClasses="width-10,width-30,width-20,width-20,width-20">
+						<h:dataTable id="crudDataTable" value="#{countryBean.items}" var="x" styleClass="table table-hover container-fluid" columnClasses="col-xs-1,col-xs-3,col-xs-2,col-xs-2,col-xs-2">
 							<h:column>
 								<f:facet name="header">
 									<h:outputText value="#" />
@@ -34,20 +84,21 @@
 									<h:outputText value="Actions" />
 								</f:facet>
 								<div class="btn-group" role="group" aria-label="...">
-									<h:outputLink title="Editar" value="mgt-users-edition.xhtml?action=update&amp;id=#{x.id}" styleClass="btn btn-xs btn-danger" role="button">
-										<i class="fa fa-fw fa-pencil" />
+									<h:outputLink title="Editar" value="country-edit.xhtml?id=#{x.id}" styleClass="btn btn-xs btn-danger" role="button">
+										<i class="glyphicon glyphicon-pencil" />
 									</h:outputLink>
 									<h:commandLink title="Remover" styleClass="btn btn-xs btn-danger" role="button">
-										<i class="fa fa-fw fa-close" />
-										<f:ajax execute="@this" render=":deleteActionsForm" onevent="function(event) { if (event.status == 'success') { $('#removeModal').modal('show'); } }" onerror="defaultErrorHandler" />
-										<f:setPropertyActionListener value="#{x}" target="#{countryBean.selectedItem}" />
+										<i class="glyphicon glyphicon-remove" />
+										<f:ajax execute="@this" />
+										<f:setPropertyActionListener value="#{x}" target="#{countryBean.item}" />
 									</h:commandLink>
 								</div>
 							</h:column>
 						</h:dataTable>
 					</div>
-				</div>
+				</h:form>
 			</div>
-		</h:form>
+		</div>
+
 	</ui:define>
 </ui:composition>

@@ -1,5 +1,9 @@
 package com.risucci.quickstart.jsf.bean;
 
+import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.exact;
+import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.startsWith;
+import static org.springframework.data.domain.ExampleMatcher.StringMatcher.CONTAINING;
+
 import java.util.List;
 import java.util.Map;
 
@@ -12,9 +16,13 @@ import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.util.StringUtils;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import com.risucci.quickstart.jsf.model.Country;
+import com.risucci.quickstart.jsf.util.FacesUtils;
 import com.risucci.quickstart.repository.CountryRepository;
 
 /**
@@ -29,9 +37,17 @@ import com.risucci.quickstart.repository.CountryRepository;
 @ViewScoped
 public class CountryBean extends SpringBeanAutowiringSupport {
 
+	private static final ExampleMatcher MATCHER = ExampleMatcher.matching() //
+			.withStringMatcher(CONTAINING) //
+			.withIgnoreCase() //
+			.withMatcher("name", startsWith()) //
+			.withMatcher("acronym", startsWith()) //
+			.withMatcher("population", exact());
+
 	@Autowired
 	private CountryRepository repository;
 
+	// Entity Handlers
 	private List<Country> items;
 	private Country item;
 
@@ -45,17 +61,39 @@ public class CountryBean extends SpringBeanAutowiringSupport {
 		if (id != null) {
 			System.out.println("ID = " + id);
 			this.item = repository.findOne(Long.valueOf(id));
+		} else {
+			eraseFilter(null);
 		}
-
-		items = repository.findAll();
 	}
+
+	/*
+	 * Actions
+	 */
 
 	public void save(AjaxBehaviorEvent event) {
 		repository.save(item);
+		FacesUtils.redirect("/protected/manage/country-list.xhtml");
 	}
 
 	public void delete(AjaxBehaviorEvent event) {
 		repository.delete(item.getId());
+	}
+
+	public void filter(AjaxBehaviorEvent event) {
+		// Nullifying empty values
+		if (StringUtils.isEmpty(item.getName())) {
+			item.setName(null);
+		}
+		if (StringUtils.isEmpty(item.getAcronym())) {
+			item.setAcronym(null);
+		}
+
+		this.items = repository.findAll(Example.of(item, MATCHER));
+	}
+
+	public void eraseFilter(AjaxBehaviorEvent event) {
+		this.item = new Country();
+		this.filter(event);
 	}
 
 	/*
