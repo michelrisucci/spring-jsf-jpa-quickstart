@@ -18,6 +18,10 @@ public final class FacesUtils {
 	private FacesUtils() {
 	}
 
+	/*
+	 * Static Functionalities
+	 */
+
 	public static FacesContext getFacesContext() {
 		return FacesContext.getCurrentInstance();
 	}
@@ -41,7 +45,8 @@ public final class FacesUtils {
 		addGlobalMessage(severity, message, null);
 	}
 
-	public static void addI18nGlobalMessage(FacesMessageSeverity severity, String i18nTitle, Object[] titleArgs, String i18nDetail, Object[] detailArgs) {
+	public static void addI18nGlobalMessage(FacesMessageSeverity severity, String i18nTitle, Object[] titleArgs,
+			String i18nDetail, Object[] detailArgs) {
 		String title = formatI18nMessage(i18nTitle, titleArgs);
 		if (i18nDetail != null && !i18nDetail.isEmpty()) {
 			String detail = formatI18nMessage(i18nDetail, detailArgs);

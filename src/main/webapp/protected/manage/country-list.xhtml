@@ -1,32 +1,41 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:cc="http://xmlns.jcp.org/jsf/composite" xmlns:jsf="http://xmlns.jcp.org/jsf" xmlns:a="http://xmlns.jcp.org/jsf/passthrough" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions" template="/WEB-INF/templates/main-with-nav.xhtml">
 	<ui:define name="body">
+		<!-- TOOLBAR NAV -->
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="nav navbar-nav navbar-left">
+					<h:outputLink value="country-edit.xhtml" title="#{i18n['new']}" styleClass="btn btn-sm btn-default navbar-btn" role="button">
+						<i class="glyphicon glyphicon-plus"></i>
+						<span>#{i18n['new']}</span>
+					</h:outputLink>
+					<button type="button" title="#{i18n['find']}" class="btn btn-sm btn-default navbar-btn" data-toggle="collapse" data-target="div#filterCollapsible" aria-expanded="false">
+						<i class="glyphicon glyphicon-search"></i> <span>#{i18n['find']}</span>
+					</button>
+				</div>
+			</div>
+		</nav>
 
 		<!-- FILTER -->
-		<div class="panel panel-default">
-			<div class="panel-heading" role="tab" id="filterHeading">
-				<a role="button" class="panel-title" href="#collapseFilter" data-toggle="collapse" aria-expanded="true" aria-controls="collapseFilter">
-					<i class="glyphicon glyphicon-filter"></i> <span>Filter</span>
-				</a>
-			</div>
-			<div id="collapseFilter" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="filterHeading">
-				<div class="panel-body">
-					<h:form id="filterForm">
+		<div id="filterCollapsible" class="collapse">
+			<h:form id="filterForm">
+				<div class="panel panel-default" role="tabpanel" aria-labelledby="filterHeading">
+					<div class="panel-body">
 						<div class="row">
 							<div class="col-xs-4">
 								<div class="form-group">
-									<h:outputLabel for="nameInput" value="Name" />
+									<h:outputLabel for="nameInput" value="#{i18n['country.name']}" />
 									<h:inputText id="nameInput" styleClass="form-control input-sm" value="#{countryBean.item.name}" />
 								</div>
 							</div>
 							<div class="col-xs-4">
 								<div class="form-group">
-									<h:outputLabel for="acronymInput" value="Acronym" />
+									<h:outputLabel for="acronymInput" value="#{i18n['country.acronym']}" />
 									<h:inputText id="acronymInput" styleClass="form-control input-sm" value="#{countryBean.item.acronym}" />
 								</div>
 							</div>
 							<div class="col-xs-4">
 								<div class="form-group">
-									<h:outputLabel for="populationInput" value="Population" />
+									<h:outputLabel for="populationInput" value="#{i18n['country.population']}" />
 									<h:inputText id="populationInput" styleClass="form-control input-sm" value="#{countryBean.item.population}" a:type="number" />
 								</div>
 							</div>
@@ -34,19 +43,19 @@
 						<div class="row">
 							<div class="col-xs-12">
 								<button jsf:id="doFilterButton" type="submit" class="btn btn-sm btn-primary">
-									<i class="glyphicon glyphicon-filter"></i> <span>Filter</span>
-									<f:ajax event="click" listener="#{countryBean.filter}" execute="@form" render=":dataTableForm" />
+									<i class="glyphicon glyphicon-filter"></i> <span>#{i18n['filter']}</span>
+									<f:ajax event="click" listener="#{countryBean.filter}" execute="@form" render=":dataTableForm :globalMessages" />
 								</button>
 								<h:outputText value="&#160;" />
 								<button jsf:id="eraseFilterButton" type="submit" class="btn btn-sm btn-warning">
-									<i class="glyphicon glyphicon-erase"></i> <span>Erase</span>
+									<i class="glyphicon glyphicon-erase"></i> <span>#{i18n['erase']}</span>
 									<f:ajax event="click" listener="#{countryBean.eraseFilter}" execute="@form" render="@form :dataTableForm" />
 								</button>
 							</div>
 						</div>
-					</h:form>
+					</div>
 				</div>
-			</div>
+			</h:form>
 		</div>
 
 		<!-- DATATABLE -->
@@ -54,7 +63,7 @@
 			<div class="panel-body">
 				<h:form id="dataTableForm">
 					<div class="table-responsive">
-						<h:dataTable id="crudDataTable" value="#{countryBean.items}" var="x" styleClass="table table-hover container-fluid" columnClasses="col-xs-1,col-xs-3,col-xs-2,col-xs-2,col-xs-2">
+						<h:dataTable id="crudDataTable" value="#{countryBean.items}" var="x" styleClass="table table-hover container-fluid" columnClasses="col-xs-1,col-xs-3,col-xs-2,col-xs-2 text-right,col-xs-2">
 							<h:column>
 								<f:facet name="header">
 									<h:outputText value="#" />
@@ -63,33 +72,35 @@
 							</h:column>
 							<h:column>
 								<f:facet name="header">
-									<h:outputText value="Name" />
+									<h:outputText value="#{i18n['country.name']}" />
 								</f:facet>
 								<h:outputText value="#{x.name}" />
 							</h:column>
 							<h:column>
 								<f:facet name="header">
-									<h:outputText value="Acronym" />
+									<h:outputText value="#{i18n['country.acronym']}" />
 								</f:facet>
 								<h:outputText value="#{x.acronym}" />
 							</h:column>
 							<h:column>
 								<f:facet name="header">
-									<h:outputText value="Population" />
+									<h:outputText value="#{i18n['country.population']}" />
 								</f:facet>
-								<h:outputText value="#{x.population}" />
+								<h:outputText value="#{x.population}">
+									<f:convertNumber type="number" />
+								</h:outputText>
 							</h:column>
 							<h:column>
 								<f:facet name="header">
-									<h:outputText value="Actions" />
+									<h:outputText value="#{i18n['actions']}" />
 								</f:facet>
-								<div class="btn-group" role="group" aria-label="...">
-									<h:outputLink title="Editar" value="country-edit.xhtml?id=#{x.id}" styleClass="btn btn-xs btn-danger" role="button">
+								<div class="btn-group" role="group">
+									<h:outputLink title="#{i18n['edit']}" value="country-edit.xhtml?id=#{x.id}" styleClass="btn btn-xs btn-primary" role="button">
 										<i class="glyphicon glyphicon-pencil" />
 									</h:outputLink>
-									<h:commandLink title="Remover" styleClass="btn btn-xs btn-danger" role="button">
+									<h:commandLink title="#{i18n['remove']}" styleClass="btn btn-xs btn-danger" role="button">
 										<i class="glyphicon glyphicon-remove" />
-										<f:ajax execute="@this" />
+										<f:ajax execute="@this" render=":removeModalForm" onevent="function(event) { if (event.status == 'success') { $('#removeModal').modal('show'); } }" />
 										<f:setPropertyActionListener value="#{x}" target="#{countryBean.item}" />
 									</h:commandLink>
 								</div>
@@ -100,5 +111,34 @@
 			</div>
 		</div>
 
+		<!-- REMOVE MODAL -->
+		<div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="removeModalLabel">
+			<div class="modal-dialog modal-sm" role="document">
+				<h:form id="removeModalForm">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<i class="glyphicon glyphicon-remove"></i>
+							</button>
+							<h4 class="modal-title" id="removeModalLabel">#{i18n['remove']}</h4>
+						</div>
+						<div class="modal-body">
+							<h:outputFormat value="#{i18n['operations.remove.areYouSure']}">
+								<f:param value="#{countryBean.item.name}" />
+							</h:outputFormat>
+						</div>
+						<div class="modal-footer">
+							<button jsf:id="saveButton" type="submit" class="btn btn-sm btn-danger">
+								<i class="glyphicon glyphicon-ok" /> <span>#{i18n['remove']}</span>
+								<f:ajax execute="@form" listener="#{countryBean.remove}" render=":globalMessages" />
+							</button>
+							<button type="button" class="btn btn-sm btn-default" data-dismiss="modal">
+								<i class="glyphicon glyphicon-remove" /> <span>#{i18n['cancel']}</span>
+							</button>
+						</div>
+					</div>
+				</h:form>
+			</div>
+		</div>
 	</ui:define>
 </ui:composition>

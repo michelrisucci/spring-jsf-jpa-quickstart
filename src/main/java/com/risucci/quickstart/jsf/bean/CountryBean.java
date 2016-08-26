@@ -1,5 +1,7 @@
 package com.risucci.quickstart.jsf.bean;
 
+import static com.risucci.quickstart.jsf.util.FacesMessageSeverity.ERROR;
+import static com.risucci.quickstart.jsf.util.FacesMessageSeverity.INFO;
 import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.exact;
 import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.startsWith;
 import static org.springframework.data.domain.ExampleMatcher.StringMatcher.CONTAINING;
@@ -59,7 +61,6 @@ public class CountryBean extends SpringBeanAutowiringSupport {
 
 		String id = rp.get("id");
 		if (id != null) {
-			System.out.println("ID = " + id);
 			this.item = repository.findOne(Long.valueOf(id));
 		} else {
 			eraseFilter(null);
@@ -71,12 +72,25 @@ public class CountryBean extends SpringBeanAutowiringSupport {
 	 */
 
 	public void save(AjaxBehaviorEvent event) {
-		repository.save(item);
-		FacesUtils.redirect("/protected/manage/country-list.xhtml");
+		try {
+			item = repository.save(item);
+
+			FacesUtils.addI18nGlobalMessage(INFO, "operations.success.save", item.getName());
+			FacesUtils.redirect("/protected/manage/country-list.xhtml");
+		} catch (Exception e) {
+			FacesUtils.addI18nGlobalMessage(ERROR, "operations.failWithDetails", e.getMessage());
+		}
 	}
 
-	public void delete(AjaxBehaviorEvent event) {
-		repository.delete(item.getId());
+	public void remove(AjaxBehaviorEvent event) {
+		try {
+			repository.delete(item.getId());
+
+			FacesUtils.addI18nGlobalMessage(INFO, "operations.success.remove", item.getName());
+			FacesUtils.redirect("/protected/manage/country-list.xhtml");
+		} catch (Exception e) {
+			FacesUtils.addI18nGlobalMessage(ERROR, "operations.failWithDetails", e.getMessage());
+		}
 	}
 
 	public void filter(AjaxBehaviorEvent event) {

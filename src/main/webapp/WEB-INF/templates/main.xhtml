@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:cc="http://xmlns.jcp.org/jsf/composite" xmlns:jsf="http://xmlns.jcp.org/jsf" xmlns:a="http://xmlns.jcp.org/jsf/passthrough" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:cc="http://xmlns.jcp.org/jsf/composite" xmlns:jsf="http://xmlns.jcp.org/jsf" xmlns:a="http://xmlns.jcp.org/jsf/passthrough" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions" lang="#{localeManager.language}">
 <h:head>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -22,10 +22,12 @@
 </h:head>
 
 <h:body>
-	<div class="container">
-		<!-- CONTENT -->
-		<ui:insert name="content" />
-	</div>
+	<f:view locale="#{localeManager.locale}">
+		<div class="container">
+			<!-- CONTENT -->
+			<ui:insert name="content" />
+		</div>
+	</f:view>
 
 	<!-- JQUERY -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>

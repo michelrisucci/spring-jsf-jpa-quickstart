@@ -32,6 +32,10 @@
 					<webApp>
 						<contextPath>/jsf</contextPath>
 					</webApp>
+					<scanIntervalSeconds>0</scanIntervalSeconds>
+					<scanTargets>
+						<scanTarget>target/classes/</scanTarget>
+					</scanTargets>
 				</configuration>
 			</plugin>
 		</plugins>
