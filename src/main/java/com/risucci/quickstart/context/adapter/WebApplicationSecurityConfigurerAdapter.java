@@ -18,7 +18,7 @@ public class WebApplicationSecurityConfigurerAdapter extends WebSecurityConfigur
 				.loginPage("/public/login.xhtml") //
 				.loginProcessingUrl("/public/login.xhtml") //
 				.defaultSuccessUrl("/protected/index.xhtml") //
-				.failureUrl("/public/loginFailure.xhtml") //
+				.failureUrl("/public/login.xhtml?source=loginError") //
 				.permitAll();
 
 		// Security policy: public available paths

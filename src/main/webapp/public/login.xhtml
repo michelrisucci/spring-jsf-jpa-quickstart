@@ -11,14 +11,22 @@
 
 				<!-- USERNAME -->
 				<h:outputLabel for="username" value="Username" styleClass="sr-only" />
-				<h:inputText id="username" styleClass="form-control" required="true" a:placeholder="Username" a:required="required" a:autofocus="autofocus" />
+				<h:inputText id="username" styleClass="form-control" required="true" a:placeholder="#{i18n['username']}" a:required="required" a:autofocus="autofocus" />
 
 				<!-- PASSWORD -->
 				<h:outputLabel for="password" value="Password" styleClass="sr-only" />
-				<h:inputSecret id="password" styleClass="form-control" required="true" a:placeholder="Password" a:required="required" a:autofocus="autofocus" />
+				<h:inputSecret id="password" styleClass="form-control" required="true" a:placeholder="#{i18n['password']}" a:required="required" a:autofocus="autofocus" />
 
 				<!-- SUBMIT BUTTON -->
 				<h:commandButton id="signin" value="#{i18n['signIn']}" styleClass="btn btn-lg btn-primary btn-block" />
+
+				<!-- LOGIN ERROR MESSAGE -->
+				<h:panelGroup layout="block" styleClass="alert alert-danger alert-dismissible" rendered="#{param['source'] eq 'loginError'}" a:role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<i class="glyphicon glyphicon-remove"></i>
+					</button>
+					<h:outputText value="#{i18n['login.failure']}" />
+				</h:panelGroup>
 
 				<!-- LOGOUT MESSAGE -->
 				<h:panelGroup layout="block" styleClass="alert alert-info alert-dismissible" rendered="#{param['source'] eq 'logout'}" a:role="alert">
