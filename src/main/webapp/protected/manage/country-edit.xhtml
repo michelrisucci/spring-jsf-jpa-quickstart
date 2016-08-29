@@ -5,15 +5,15 @@
 			<div class="panel-body">
 				<h:form id="editionForm">
 					<div class="form-group">
-						<h:outputLabel for="nameInput" value="Name" />
+						<h:outputLabel for="nameInput" value="#{i18n['country.name']}" />
 						<h:inputText id="nameInput" value="#{countryBean.item.name}" styleClass="form-control" />
 					</div>
 					<div class="form-group">
-						<h:outputLabel for="acronymInput" value="Acronym" />
+						<h:outputLabel for="acronymInput" value="#{i18n['country.acronym']}" />
 						<h:inputText id="acronymInput" value="#{countryBean.item.acronym}" styleClass="form-control" />
 					</div>
 					<div class="form-group">
-						<h:outputLabel for="populationInput" value="Population" />
+						<h:outputLabel for="populationInput" value="#{i18n['country.population']}" />
 						<h:inputText id="populationInput" value="#{countryBean.item.population}" styleClass="form-control" a:type="number" />
 					</div>
 					<div class="form-group">

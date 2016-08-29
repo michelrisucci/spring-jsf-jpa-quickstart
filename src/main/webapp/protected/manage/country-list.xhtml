@@ -44,12 +44,12 @@
 							<div class="col-xs-12">
 								<button jsf:id="doFilterButton" type="submit" class="btn btn-sm btn-primary">
 									<i class="glyphicon glyphicon-filter"></i> <span>#{i18n['filter']}</span>
-									<f:ajax event="click" listener="#{countryBean.filter}" execute="@form" render=":dataTableForm :globalMessages" />
+									<f:ajax event="click" listener="#{countryBean.filter}" execute="@form" render=":paginationForm :dataTableForm :globalMessages" />
 								</button>
 								<h:outputText value="&#160;" />
 								<button jsf:id="eraseFilterButton" type="submit" class="btn btn-sm btn-warning">
 									<i class="glyphicon glyphicon-erase"></i> <span>#{i18n['erase']}</span>
-									<f:ajax event="click" listener="#{countryBean.eraseFilter}" execute="@form" render="@form :dataTableForm" />
+									<f:ajax event="click" listener="#{countryBean.eraseFilter}" execute="@form" render=":filterForm :paginationForm :dataTableForm :globalMessages" />
 								</button>
 							</div>
 						</div>
@@ -58,12 +58,40 @@
 			</h:form>
 		</div>
 
+		<!-- PAGINATION -->
+		<nav jsf:id="pagination" aria-label="#{i18n['pagination']}" class="text-center">
+			<h:form id="paginationForm">
+				<ul class="pagination pagination-sm">
+					<li class="#{countryBean.pageIndex eq 0 ? 'disabled' : ''}">
+						<h:commandLink action="#{countryBean.filter}" value="&#171;" disabled="#{countryBean.pageIndex eq 0}">
+							<f:setPropertyActionListener value="#{countryBean.pageIndex - 1}" target="#{countryBean.pageIndex}" />
+							<f:ajax execute="@this" render=":paginationForm :dataTableForm :globalMessages" />
+						</h:commandLink>
+					</li>
+					<c:forEach begin="0" end="#{countryBean.items.totalPages - 1}" var="i">
+						<li class="#{i eq countryBean.pageIndex ? 'active' : ''}">
+							<h:commandLink action="#{countryBean.filter}" value="#{i+1}">
+								<f:setPropertyActionListener value="#{i}" target="#{countryBean.pageIndex}" />
+								<f:ajax execute="@this" render=":paginationForm :dataTableForm :globalMessages" />
+							</h:commandLink>
+						</li>
+					</c:forEach>
+					<li class="#{(countryBean.pageIndex + 1) eq countryBean.items.totalPages ? 'disabled' : ''}">
+						<h:commandLink action="#{countryBean.filter}" value="&#187;" disabled="#{(countryBean.pageIndex + 1) eq countryBean.items.totalPages}">
+							<f:setPropertyActionListener value="#{countryBean.pageIndex + 1}" target="#{countryBean.pageIndex}" />
+							<f:ajax execute="@this" render=":paginationForm :dataTableForm :globalMessages" />
+						</h:commandLink>
+					</li>
+				</ul>
+			</h:form>
+		</nav>
+
 		<!-- DATATABLE -->
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<h:form id="dataTableForm">
 					<div class="table-responsive">
-						<h:dataTable id="crudDataTable" value="#{countryBean.items}" var="x" styleClass="table table-hover container-fluid" columnClasses="col-xs-1,col-xs-3,col-xs-2,col-xs-2 text-right,col-xs-2">
+						<h:dataTable id="crudDataTable" value="#{countryBean.items.content}" var="x" styleClass="table table-hover container-fluid" columnClasses="col-xs-1,col-xs-3,col-xs-2,col-xs-2 text-right,col-xs-2">
 							<h:column>
 								<f:facet name="header">
 									<h:outputText value="#" />

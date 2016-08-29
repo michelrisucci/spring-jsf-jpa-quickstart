@@ -6,7 +6,6 @@ import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatc
 import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.startsWith;
 import static org.springframework.data.domain.ExampleMatcher.StringMatcher.CONTAINING;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
@@ -20,6 +19,8 @@ import javax.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -50,11 +51,16 @@ public class CountryBean extends SpringBeanAutowiringSupport {
 	private CountryRepository repository;
 
 	// Entity Handlers
-	private List<Country> items;
+	private int pageSize;
+	private int pageIndex;
+	private Page<Country> items;
 	private Country item;
 
 	@PostConstruct
 	private void postConstruct() {
+		pageSize = 10;
+		pageIndex = 0;
+
 		FacesContext fc = FacesContext.getCurrentInstance();
 		ExternalContext ec = fc.getExternalContext();
 		Map<String, String> rp = ec.getRequestParameterMap();
@@ -63,7 +69,7 @@ public class CountryBean extends SpringBeanAutowiringSupport {
 		if (id != null) {
 			this.item = repository.findOne(Long.valueOf(id));
 		} else {
-			eraseFilter(null);
+			eraseFilter();
 		}
 	}
 
@@ -93,7 +99,7 @@ public class CountryBean extends SpringBeanAutowiringSupport {
 		}
 	}
 
-	public void filter(AjaxBehaviorEvent event) {
+	public void filter() {
 		// Nullifying empty values
 		if (StringUtils.isEmpty(item.getName())) {
 			item.setName(null);
@@ -102,23 +108,51 @@ public class CountryBean extends SpringBeanAutowiringSupport {
 			item.setAcronym(null);
 		}
 
-		this.items = repository.findAll(Example.of(item, MATCHER));
+		// Counting page with conditionals
+		Example<Country> example = Example.of(item, MATCHER);
+		long count = repository.count(example);
+
+		// If first FETCH is an index out of count range, reset page index
+		int firstFetchOnPage = pageIndex * pageSize;
+		if (firstFetchOnPage > count) {
+			pageIndex = 0;
+		}
+
+		// Filtering page with conditionals
+		PageRequest pageRequest = new PageRequest(pageIndex, pageSize);
+		items = repository.findAll(example, pageRequest);
 	}
 
-	public void eraseFilter(AjaxBehaviorEvent event) {
+	public void eraseFilter() {
 		this.item = new Country();
-		this.filter(event);
+		this.filter();
 	}
 
 	/*
 	 * Getters and Setters
 	 */
 
-	public List<Country> getItems() {
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+
+	public int getPageIndex() {
+		return pageIndex;
+	}
+
+	public void setPageIndex(int pageIndex) {
+		this.pageIndex = pageIndex;
+	}
+
+	public Page<Country> getItems() {
 		return items;
 	}
 
-	public void setItems(List<Country> items) {
+	public void setItems(Page<Country> items) {
 		this.items = items;
 	}
 
