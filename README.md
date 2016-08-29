@@ -7,6 +7,9 @@ Spring + JSF + JPA Quickstart
 
 - What it is: a quickstart project containing initial structure to:
   - ZERO CONFIGURATIONS to run the project! Checkout and run!
+    - Web Application Security Access:
+      - Username: **`admin`**
+      - Password: **`123456`**
   - Spring Context 4.3 as Context Provider;
   - Spring Security 4.1 as Web Security Provider;
   - Jetty 9.3 as Webserver;
