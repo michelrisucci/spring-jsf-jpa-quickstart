@@ -1,6 +1,4 @@
-[![Build Status](https://travis-ci.org/michelrisucci/spring-jsf-jpa-quickstart.svg?branch=master)](https://travis-ci.org/michelrisucci/spring-jsf-jpa-quickstart)
-
-[![Latest Stable Release](https://img.shields.io/badge/stable-2.0.0.GA-blue.svg)](https://github.com/michelrisucci/spring-jsf-jpa-quickstart/releases/tag/2.0.0.GA)
+[![Build Status](https://travis-ci.org/michelrisucci/spring-jsf-jpa-quickstart.svg?branch=master)](https://travis-ci.org/michelrisucci/spring-jsf-jpa-quickstart) [![Latest Stable Release](https://img.shields.io/badge/stable-2.0.0.GA-blue.svg)](https://github.com/michelrisucci/spring-jsf-jpa-quickstart/releases/tag/2.0.0.GA)
 
 Spring + JSF + JPA Quickstart
 =============================

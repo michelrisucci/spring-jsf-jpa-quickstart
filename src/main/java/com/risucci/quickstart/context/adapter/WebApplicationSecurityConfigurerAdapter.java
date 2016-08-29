@@ -21,7 +21,6 @@ public class WebApplicationSecurityConfigurerAdapter extends WebSecurityConfigur
 				.failureUrl("/public/loginFailure.xhtml") //
 				.permitAll();
 
-		// TODO Switch policy to secure /manager path.
 		// Security policy: public available paths
 		http.authorizeRequests() //
 				.antMatchers("/").permitAll() //
