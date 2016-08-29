@@ -24,9 +24,4 @@
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
 
-	<!-- SERVLET SESSION CONFIGURATION -->
-	<session-config>
-		<session-timeout>30</session-timeout>
-	</session-config>
-
 </web-app>

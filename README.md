@@ -1,18 +1,18 @@
 [![Build Status](https://travis-ci.org/michelrisucci/spring-jsf-jpa-quickstart.svg?branch=master)](https://travis-ci.org/michelrisucci/spring-jsf-jpa-quickstart)
 
-[![Latest Stable Release](https://img.shields.io/badge/stable-1.4.0.GA-blue.svg)](https://github.com/michelrisucci/spring-jsf-jpa-quickstart/releases/tag/1.4.0.GA) ![Master Branch Not Yet Usable Snapshot](https://img.shields.io/badge/!-master_branch_not_yet_usable_--_2.0.0.ALPHA--SNAPSHOT-red.svg)
+[![Latest Stable Release](https://img.shields.io/badge/stable-2.0.0.GA-blue.svg)](https://github.com/michelrisucci/spring-jsf-jpa-quickstart/releases/tag/2.0.0.GA)
 
 Spring + JSF + JPA Quickstart
 =============================
 
-- Version 1.4.0.GA
+- Version 2.0.0.GA
 
 - What it is: a quickstart project containing initial structure to:
   - ZERO CONFIGURATIONS to run the project! Checkout and run!
-  - Spring Context 4.x as JEE context provider;
-  - Jetty 9.2.x as Webserver;
-  - Mojarra JavaServer Faces 2.2.x as JSF implementation;
-  - Primefaces 5.x as JSF components library;
+  - Spring Context 4.3 as Context Provider;
+  - Spring Security 4.1 as Web Security Provider;
+  - Jetty 9.3 as Webserver;
+  - Pure JavaServer Faces 2.2 (no Primefaces required);
   - Built-in H2, PostgreSQL and MySQL Server connection for JDBC/JPA (extensible to ANY database - add specific JDBC drivers to POM if needed);
     - Oracle;
     - PostgreSQL;
@@ -21,29 +21,30 @@ Spring + JSF + JPA Quickstart
     - H2;
     - Derby;
     - and many more...
-  - Hibernate 4.x as JPA 2.1 provider (switchable to EclipseLink if convenient - see web.xml);
+  - Hibernate 5 as JPA 2.1 provider;
   - Full-featured CRUD operations over an entity;
+    - CRUD filtering features using Spring Data QBE;
   - Internationalization;
-  - Bean utilities;
-  - Primefaces Twitter Bootstrap Theme;
-
+  - Faces bean utilities using FacesUtils class static methods;
+  - Twitter Bootstrap 3.3 templating;
 
 - To run:
   - Checkout using Git or SVN;
-  - Run using Maven 3.x `mvn clean jetty:run`;
+  - Run using Maven 3 `mvn clean jetty:run`;
 
-- Optional
-  - Customize database (optional):
-    - Create a database over your preferred SGBD;
-    - Add the desired JAR to POM, if needed: built-in H2, PostgreSQL and MySQL drivers;
-    - Configure database connection settings over `src/main/webapp/WEB-INF/database`;
-  - Customize JPA provider:
-    - Change `spring.profiles.active` context-param, between `eclipselink` and `hibernate` over `src/main/webapp/WEB-INF/web.xml`;
-  - Customize Primefaces themes:
-    - Change `primefaces.THEME` context-param over `src/main/webapp/WEB-INF/web.xml`;
+- Customize database (optional):
+  - Create a database over your preferred SGBD;
+  - Add the desired JAR to POM, if needed: built-in H2, PostgreSQL and MySQL drivers;
+  - Configure database connection settings over `src/main/webapp/WEB-INF/database`;
 
 What's new
 =============================
+
+- Version 2.0.0.GA
+  - Pure JavaServer Faces 2.2 (no Primefaces required);
+  - Spring Security 4.1 as Web Security Provider;
+  - Hibernate 5 as JPA 2.1 provider;
+  - Twitter Bootstrap 3.3 templating;
 
 - Version 1.4.0.GA
   - Added H2 JAR dependency for built-in support to H2 database;
