@@ -3,7 +3,7 @@
 Spring + JSF + JPA Quickstart
 =============================
 
-- Version 2.0.0.GA
+- Version 2.0.1.GA
 
 - What it is: a quickstart project containing initial structure to:
   - ZERO CONFIGURATIONS to run the project! Checkout and run!
@@ -36,10 +36,13 @@ Spring + JSF + JPA Quickstart
 - Customize database (optional):
   - Create a database over your preferred SGBD;
   - Add the desired JAR to POM, if needed: built-in H2, PostgreSQL and MySQL drivers;
-  - Configure database connection settings over `src/main/webapp/WEB-INF/database`;
+  - Configure database connection settings over `src/main/resources/datasource.properties`;
 
 What's new
 =============================
+
+- Version 2.0.1.GA
+  - Fixed datasource properties location.
 
 - Version 2.0.0.GA
   - Pure JavaServer Faces 2.2 (no Primefaces required);
